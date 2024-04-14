@@ -53,6 +53,7 @@ namespace Pulumi.Clickhouse
         {
             var dst = src ?? new global::Pulumi.InvokeOptions{};
             dst.Version = src?.Version ?? Version;
+            dst.PluginDownloadURL = src?.PluginDownloadURL ?? "https://github.com/Triple-Whale/pulumi-clickhouse/releases";
             return dst;
         }
 

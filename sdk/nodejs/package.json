@@ -23,6 +23,7 @@
     },
     "pulumi": {
         "resource": true,
-        "name": "clickhouse"
+        "name": "clickhouse",
+        "server": "https://github.com/Triple-Whale/pulumi-clickhouse/releases"
     }
 }
