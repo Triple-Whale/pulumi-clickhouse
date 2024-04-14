@@ -1,0 +1,665 @@
+{
+    "name": "clickhouse",
+    "description": "A Pulumi package for creating and managing clickhouse cloud resources.",
+    "keywords": [
+        "triplewhale",
+        "clickhouse",
+        "category/cloud"
+    ],
+    "homepage": "https://www.pulumi.com",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`clickhouse` Terraform Provider](https://github.com/Triple-Whale/terraform-provider-clickhouse).",
+    "repository": "https://github.com/Triple-Whale/pulumi-clickhouse",
+    "pluginDownloadURL": "https://github.com/Triple-Whale/pulumi-clickhouse/releases",
+    "publisher": "triplewhale",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "language": {
+        "csharp": {
+            "packageReferences": {
+                "Pulumi": "3.*"
+            },
+            "compatibility": "tfbridge20"
+        },
+        "go": {
+            "importBasePath": "github.com/Triple-Whale/pulumi-clickhouse/sdk/go/clickhouse",
+            "generateResourceContainerTypes": true,
+            "generateExtraInputTypes": true
+        },
+        "nodejs": {
+            "packageDescription": "A Pulumi package for creating and managing clickhouse cloud resources.",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/Triple-Whale/terraform-provider-clickhouse)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-clickhouse` repo](https://github.com/Triple-Whale/pulumi-clickhouse/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-clickhouse` repo](https://github.com/Triple-Whale/terraform-provider-clickhouse/issues).",
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            },
+            "devDependencies": {
+                "@types/mime": "^2.0.0",
+                "@types/node": "^10.0.0"
+            },
+            "compatibility": "tfbridge20",
+            "disableUnionOutputTypes": true
+        },
+        "python": {
+            "requires": {
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
+            },
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/Triple-Whale/terraform-provider-clickhouse)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-clickhouse` repo](https://github.com/Triple-Whale/pulumi-clickhouse/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-clickhouse` repo](https://github.com/Triple-Whale/terraform-provider-clickhouse/issues).",
+            "compatibility": "tfbridge20",
+            "pyproject": {}
+        }
+    },
+    "config": {
+        "variables": {
+            "defaultCluster": {
+                "type": "string",
+                "description": "Default cluster, if provided will be used when no cluster is provided\n"
+            },
+            "host": {
+                "type": "string",
+                "description": "Clickhouse server url\n",
+                "secret": true
+            },
+            "password": {
+                "type": "string",
+                "description": "Clickhouse user password with admin privileges\n",
+                "secret": true
+            },
+            "port": {
+                "type": "integer",
+                "description": "Clickhouse server native protocol port (TCP)\n"
+            },
+            "secure": {
+                "type": "boolean",
+                "description": "Clickhouse secure connection\n"
+            },
+            "username": {
+                "type": "string",
+                "description": "Clickhouse username with admin privileges\n"
+            }
+        },
+        "defaults": [
+            "host",
+            "port"
+        ]
+    },
+    "types": {
+        "clickhouse:index/TableColumn:TableColumn": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Column Name\n",
+                    "willReplaceOnChanges": true
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Column Type\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "type": "object",
+            "required": [
+                "name",
+                "type"
+            ]
+        },
+        "clickhouse:index/TablePartitionBy:TablePartitionBy": {
+            "properties": {
+                "by": {
+                    "type": "string",
+                    "description": "Column to use as part of the partition key\n",
+                    "willReplaceOnChanges": true
+                },
+                "partitionFunction": {
+                    "type": "string",
+                    "description": "Partition function, could be empty or one of following: toYYYYMM, toYYYYMMDD or toYYYYMMDDhhmmss\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "type": "object",
+            "required": [
+                "by"
+            ]
+        },
+        "clickhouse:index/getDbsDb:getDbsDb": {
+            "properties": {
+                "comment": {
+                    "type": "string"
+                },
+                "dataPath": {
+                    "type": "string"
+                },
+                "engine": {
+                    "type": "string"
+                },
+                "metadataPath": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "uuid": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "comment",
+                "dataPath",
+                "engine",
+                "metadataPath",
+                "name",
+                "uuid"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        }
+    },
+    "provider": {
+        "description": "The provider type for the clickhouse package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "defaultCluster": {
+                "type": "string",
+                "description": "Default cluster, if provided will be used when no cluster is provided\n"
+            },
+            "host": {
+                "type": "string",
+                "description": "Clickhouse server url\n",
+                "secret": true
+            },
+            "password": {
+                "type": "string",
+                "description": "Clickhouse user password with admin privileges\n",
+                "secret": true
+            },
+            "port": {
+                "type": "integer",
+                "description": "Clickhouse server native protocol port (TCP)\n"
+            },
+            "secure": {
+                "type": "boolean",
+                "description": "Clickhouse secure connection\n"
+            },
+            "username": {
+                "type": "string",
+                "description": "Clickhouse username with admin privileges\n"
+            }
+        },
+        "required": [
+            "host",
+            "port"
+        ],
+        "inputProperties": {
+            "defaultCluster": {
+                "type": "string",
+                "description": "Default cluster, if provided will be used when no cluster is provided\n"
+            },
+            "host": {
+                "type": "string",
+                "description": "Clickhouse server url\n",
+                "secret": true
+            },
+            "password": {
+                "type": "string",
+                "description": "Clickhouse user password with admin privileges\n",
+                "secret": true
+            },
+            "port": {
+                "type": "integer",
+                "description": "Clickhouse server native protocol port (TCP)\n"
+            },
+            "secure": {
+                "type": "boolean",
+                "description": "Clickhouse secure connection\n"
+            },
+            "username": {
+                "type": "string",
+                "description": "Clickhouse username with admin privileges\n"
+            }
+        },
+        "requiredInputs": [
+            "host",
+            "port"
+        ]
+    },
+    "resources": {
+        "clickhouse:index/db:Db": {
+            "description": "Resource to handle clickhouse databases.\n",
+            "properties": {
+                "cluster": {
+                    "type": "string",
+                    "description": "Cluster name, not mandatory but should be provided if creating a db in a clustered server\n"
+                },
+                "comment": {
+                    "type": "string",
+                    "description": "Comment about the database\n"
+                },
+                "dataPath": {
+                    "type": "string",
+                    "description": "Database internal path\n"
+                },
+                "engine": {
+                    "type": "string",
+                    "description": "Database engine\n"
+                },
+                "metadataPath": {
+                    "type": "string",
+                    "description": "Database internal metadata path\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Database name\n"
+                },
+                "uuid": {
+                    "type": "string",
+                    "description": "Database UUID\n"
+                }
+            },
+            "required": [
+                "dataPath",
+                "engine",
+                "metadataPath",
+                "name",
+                "uuid"
+            ],
+            "inputProperties": {
+                "cluster": {
+                    "type": "string",
+                    "description": "Cluster name, not mandatory but should be provided if creating a db in a clustered server\n",
+                    "willReplaceOnChanges": true
+                },
+                "comment": {
+                    "type": "string",
+                    "description": "Comment about the database\n",
+                    "willReplaceOnChanges": true
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Database name\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Db resources.\n",
+                "properties": {
+                    "cluster": {
+                        "type": "string",
+                        "description": "Cluster name, not mandatory but should be provided if creating a db in a clustered server\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "comment": {
+                        "type": "string",
+                        "description": "Comment about the database\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "dataPath": {
+                        "type": "string",
+                        "description": "Database internal path\n"
+                    },
+                    "engine": {
+                        "type": "string",
+                        "description": "Database engine\n"
+                    },
+                    "metadataPath": {
+                        "type": "string",
+                        "description": "Database internal metadata path\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Database name\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "uuid": {
+                        "type": "string",
+                        "description": "Database UUID\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "clickhouse:index/role:Role": {
+            "description": "Resource to manage Clickhouse roles\n",
+            "properties": {
+                "database": {
+                    "type": "string",
+                    "description": "Database where to grant permissions to the user\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Role name\n"
+                },
+                "privileges": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Granted privileges to the role. Privileges will be granted at DB level\n"
+                }
+            },
+            "required": [
+                "database",
+                "name"
+            ],
+            "inputProperties": {
+                "database": {
+                    "type": "string",
+                    "description": "Database where to grant permissions to the user\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Role name\n"
+                },
+                "privileges": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Granted privileges to the role. Privileges will be granted at DB level\n"
+                }
+            },
+            "requiredInputs": [
+                "database"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Role resources.\n",
+                "properties": {
+                    "database": {
+                        "type": "string",
+                        "description": "Database where to grant permissions to the user\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Role name\n"
+                    },
+                    "privileges": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Granted privileges to the role. Privileges will be granted at DB level\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "clickhouse:index/table:Table": {
+            "description": "Resource to manage tables\n",
+            "properties": {
+                "cluster": {
+                    "type": "string",
+                    "description": "Cluster Name, it is required for Replicated or Distributed tables and forbidden in other case\n"
+                },
+                "columns": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/clickhouse:index/TableColumn:TableColumn"
+                    },
+                    "description": "Column\n"
+                },
+                "comment": {
+                    "type": "string",
+                    "description": "Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)\n"
+                },
+                "database": {
+                    "type": "string",
+                    "description": "DB Name where the table will bellow\n"
+                },
+                "engine": {
+                    "type": "string",
+                    "description": "Table engine type (Supported types so far: Distributed, ReplicatedReplacingMergeTree, ReplacingMergeTree)\n"
+                },
+                "engineParams": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Engine params in case the engine type requires them\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Column Name\n"
+                },
+                "orderBies": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Order by columns to use as sorting key\n"
+                },
+                "partitionBies": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/clickhouse:index/TablePartitionBy:TablePartitionBy"
+                    },
+                    "description": "Partition Key to split data\n"
+                }
+            },
+            "required": [
+                "database",
+                "engine",
+                "engineParams",
+                "name"
+            ],
+            "inputProperties": {
+                "cluster": {
+                    "type": "string",
+                    "description": "Cluster Name, it is required for Replicated or Distributed tables and forbidden in other case\n",
+                    "willReplaceOnChanges": true
+                },
+                "columns": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/clickhouse:index/TableColumn:TableColumn"
+                    },
+                    "description": "Column\n",
+                    "willReplaceOnChanges": true
+                },
+                "comment": {
+                    "type": "string",
+                    "description": "Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)\n",
+                    "willReplaceOnChanges": true
+                },
+                "database": {
+                    "type": "string",
+                    "description": "DB Name where the table will bellow\n",
+                    "willReplaceOnChanges": true
+                },
+                "engine": {
+                    "type": "string",
+                    "description": "Table engine type (Supported types so far: Distributed, ReplicatedReplacingMergeTree, ReplacingMergeTree)\n",
+                    "willReplaceOnChanges": true
+                },
+                "engineParams": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Engine params in case the engine type requires them\n",
+                    "willReplaceOnChanges": true
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Column Name\n",
+                    "willReplaceOnChanges": true
+                },
+                "orderBies": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Order by columns to use as sorting key\n",
+                    "willReplaceOnChanges": true
+                },
+                "partitionBies": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/clickhouse:index/TablePartitionBy:TablePartitionBy"
+                    },
+                    "description": "Partition Key to split data\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "database",
+                "engine",
+                "engineParams"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Table resources.\n",
+                "properties": {
+                    "cluster": {
+                        "type": "string",
+                        "description": "Cluster Name, it is required for Replicated or Distributed tables and forbidden in other case\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "columns": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/clickhouse:index/TableColumn:TableColumn"
+                        },
+                        "description": "Column\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "comment": {
+                        "type": "string",
+                        "description": "Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "database": {
+                        "type": "string",
+                        "description": "DB Name where the table will bellow\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "engine": {
+                        "type": "string",
+                        "description": "Table engine type (Supported types so far: Distributed, ReplicatedReplacingMergeTree, ReplacingMergeTree)\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "engineParams": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Engine params in case the engine type requires them\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Column Name\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "orderBies": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Order by columns to use as sorting key\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "partitionBies": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/clickhouse:index/TablePartitionBy:TablePartitionBy"
+                        },
+                        "description": "Partition Key to split data\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "clickhouse:index/user:User": {
+            "description": "Resource to manage Clickhouse users\n",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "User name\n"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "User password\n"
+                },
+                "roles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "User role\n"
+                }
+            },
+            "required": [
+                "name",
+                "password"
+            ],
+            "inputProperties": {
+                "name": {
+                    "type": "string",
+                    "description": "User name\n"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "User password\n"
+                },
+                "roles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "User role\n"
+                }
+            },
+            "requiredInputs": [
+                "password"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering User resources.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "User name\n"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "User password\n"
+                    },
+                    "roles": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "User role\n"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "functions": {
+        "clickhouse:index/getDbs:getDbs": {
+            "description": "Datasource to retrieve all databases set in clickhouse instance\n",
+            "outputs": {
+                "description": "A collection of values returned by getDbs.\n",
+                "properties": {
+                    "dbs": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/clickhouse:index/getDbsDb:getDbsDb"
+                        }
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "dbs",
+                    "id"
+                ]
+            }
+        }
+    }
+}

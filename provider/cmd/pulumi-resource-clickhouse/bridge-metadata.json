@@ -1,0 +1,89 @@
+{
+    "auto-aliasing": {
+        "resources": {
+            "clickhouse_db": {
+                "current": "clickhouse:index/db:Db"
+            },
+            "clickhouse_role": {
+                "current": "clickhouse:index/role:Role",
+                "fields": {
+                    "privileges": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "clickhouse_table": {
+                "current": "clickhouse:index/table:Table",
+                "fields": {
+                    "column": {
+                        "maxItemsOne": false
+                    },
+                    "engine_params": {
+                        "maxItemsOne": false
+                    },
+                    "order_by": {
+                        "maxItemsOne": false
+                    },
+                    "partition_by": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "clickhouse_user": {
+                "current": "clickhouse:index/user:User",
+                "fields": {
+                    "roles": {
+                        "maxItemsOne": false
+                    }
+                }
+            }
+        },
+        "datasources": {
+            "clickhouse_dbs": {
+                "current": "clickhouse:index/getDbs:getDbs",
+                "fields": {
+                    "dbs": {
+                        "maxItemsOne": false
+                    }
+                }
+            }
+        }
+    },
+    "auto-settings": {},
+    "renames": {
+        "resources": {
+            "clickhouse:index/db:Db": "clickhouse_db",
+            "clickhouse:index/role:Role": "clickhouse_role",
+            "clickhouse:index/table:Table": "clickhouse_table",
+            "clickhouse:index/user:User": "clickhouse_user"
+        },
+        "functions": {
+            "clickhouse:index/getDbs:getDbs": "clickhouse_dbs"
+        },
+        "renamedProperties": {
+            "clickhouse:index/TablePartitionBy:TablePartitionBy": {
+                "partitionFunction": "partition_function"
+            },
+            "clickhouse:index/db:Db": {
+                "dataPath": "data_path",
+                "metadataPath": "metadata_path"
+            },
+            "clickhouse:index/getDbsDb:getDbsDb": {
+                "dataPath": "data_path",
+                "metadataPath": "metadata_path"
+            },
+            "clickhouse:index/table:Table": {
+                "columns": "column",
+                "engineParams": "engine_params",
+                "orderBies": "order_by",
+                "partitionBies": "partition_by"
+            },
+            "clickhouse:index:Provider": {
+                "defaultCluster": "default_cluster"
+            }
+        },
+        "renamedConfigProperties": {
+            "defaultCluster": "default_cluster"
+        }
+    }
+}
