@@ -1,0 +1,23 @@
+archives:
+- id: archive
+  name_template: "{{ .Binary }}-{{ .Tag }}-{{ .Os }}-{{ .Arch }}"
+before:
+  hooks:
+  - make tfgen
+builds:
+- binary: pulumi-resource-clickhouse
+  dir: provider
+  goarch:
+  - amd64
+  - arm64
+  goos:
+  - darwin
+  - linux
+  ignore: []
+  ldflags:
+  - -X github.com/Triple-Whale/pulumi-clickhouse/provider/pkg/version.Version={{.Tag}}
+  main: ./cmd/pulumi-resource-clickhouse/
+release:
+  disable: false
+snapshot:
+  name_template: "{{ .Tag }}-SNAPSHOT"
