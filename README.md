@@ -1,9 +1,17 @@
 # TripleWhale
-## Publish
+## Publish package
 ```
 npm config -g set @tw:registry https://us-central1-npm.pkg.dev/shofifi/npm-packages/
 cd sdk/nodejs/
 tw publish
+```
+
+## Publish provider
+```
+goreleaser build --rm-dist --skip=validate
+cd dist/
+tar -zcvf ...
+gsutil cp ...
 ```
 
 # Terraform Bridge Provider Boilerplate
