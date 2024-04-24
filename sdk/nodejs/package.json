@@ -1,5 +1,5 @@
 {
-    "name": "@pulumi/clickhouse",
+    "name": "@tw/pulumi-clickhouse",
     "version": "${VERSION}",
     "description": "A Pulumi package for creating and managing clickhouse cloud resources.",
     "keywords": [

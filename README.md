@@ -1,3 +1,11 @@
+# TripleWhale
+## Publish
+```
+npm config -g set @tw:registry https://us-central1-npm.pkg.dev/shofifi/npm-packages/
+cd sdk/nodejs/
+tw publish
+```
+
 # Terraform Bridge Provider Boilerplate
 
 This repository contains boilerplate code for building a new Pulumi provider which wraps an existing Terraform provider.  
