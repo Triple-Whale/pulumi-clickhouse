@@ -53,7 +53,7 @@ export function getVersion(): string {
 
 /** @internal */
 export function resourceOptsDefaults(): any {
-    return { version: getVersion(), pluginDownloadURL: "https://github.com/Triple-Whale/pulumi-clickhouse/releases" };
+    return { version: getVersion(), pluginDownloadURL: "https://storage.googleapis.com/pulumi-shofifi/clickhouse" };
 }
 
 /** @internal */

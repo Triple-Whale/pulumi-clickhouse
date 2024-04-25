@@ -76,8 +76,8 @@ func Provider() tfbridge.ProviderInfo {
 		LogoURL: "",
 		// PluginDownloadURL is an optional URL used to download the Provider
 		// for use in Pulumi programs
-		// e.g https://github.com/org/pulumi-provider-name/releases/
-		PluginDownloadURL: "https://github.com/Triple-Whale/pulumi-clickhouse/releases",
+		// e.g https://github.com/org/pulumi-provider-name/releases/  
+		PluginDownloadURL: "https://storage.googleapis.com/pulumi-shofifi/clickhouse",
 		Description:       "A Pulumi package for creating and managing clickhouse cloud resources.",
 		// category/cloud tag helps with categorizing the package in the Pulumi Registry.
 		// For all available categories, see `Keywords` in

@@ -60,7 +60,7 @@ namespace Pulumi.Clickhouse
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/Triple-Whale/pulumi-clickhouse/releases",
+                PluginDownloadURL = "https://storage.googleapis.com/pulumi-shofifi/clickhouse",
                 AdditionalSecretOutputs =
                 {
                     "host",

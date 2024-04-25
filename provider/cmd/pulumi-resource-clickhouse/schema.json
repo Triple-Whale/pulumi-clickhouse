@@ -10,7 +10,7 @@
     "license": "Apache-2.0",
     "attribution": "This Pulumi package is based on the [`clickhouse` Terraform Provider](https://github.com/Triple-Whale/terraform-provider-clickhouse).",
     "repository": "https://github.com/Triple-Whale/pulumi-clickhouse",
-    "pluginDownloadURL": "https://github.com/Triple-Whale/pulumi-clickhouse/releases",
+    "pluginDownloadURL": "https://storage.googleapis.com/pulumi-shofifi/clickhouse",
     "publisher": "triplewhale",
     "meta": {
         "moduleFormat": "(.*)(?:/[^/]*)"

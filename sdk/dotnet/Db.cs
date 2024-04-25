@@ -80,7 +80,7 @@ namespace Pulumi.Clickhouse
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/Triple-Whale/pulumi-clickhouse/releases",
+                PluginDownloadURL = "https://storage.googleapis.com/pulumi-shofifi/clickhouse",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.

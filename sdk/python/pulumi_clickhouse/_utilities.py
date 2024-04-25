@@ -288,4 +288,4 @@ async def _await_output(o: pulumi.Output[typing.Any]) -> typing.Tuple[object, bo
     )
 
 def get_plugin_download_url():
-	return "https://github.com/Triple-Whale/pulumi-clickhouse/releases"
+	return "https://storage.googleapis.com/pulumi-shofifi/clickhouse"

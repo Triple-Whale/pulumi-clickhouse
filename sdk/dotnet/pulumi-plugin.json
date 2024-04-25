@@ -1,5 +1,5 @@
 {
   "resource": true,
   "name": "clickhouse",
-  "server": "https://github.com/Triple-Whale/pulumi-clickhouse/releases"
+  "server": "https://storage.googleapis.com/pulumi-shofifi/clickhouse"
 }
