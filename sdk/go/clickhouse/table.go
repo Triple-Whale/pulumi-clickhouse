@@ -34,6 +34,8 @@ type Table struct {
 	OrderBies pulumi.StringArrayOutput `pulumi:"orderBies"`
 	// Partition Key to split data
 	PartitionBies TablePartitionByArrayOutput `pulumi:"partitionBies"`
+	// Table settings
+	Settings pulumi.StringMapOutput `pulumi:"settings"`
 }
 
 // NewTable registers a new resource with the given unique name, arguments, and options.
@@ -93,6 +95,8 @@ type tableState struct {
 	OrderBies []string `pulumi:"orderBies"`
 	// Partition Key to split data
 	PartitionBies []TablePartitionBy `pulumi:"partitionBies"`
+	// Table settings
+	Settings map[string]string `pulumi:"settings"`
 }
 
 type TableState struct {
@@ -114,6 +118,8 @@ type TableState struct {
 	OrderBies pulumi.StringArrayInput
 	// Partition Key to split data
 	PartitionBies TablePartitionByArrayInput
+	// Table settings
+	Settings pulumi.StringMapInput
 }
 
 func (TableState) ElementType() reflect.Type {
@@ -139,6 +145,8 @@ type tableArgs struct {
 	OrderBies []string `pulumi:"orderBies"`
 	// Partition Key to split data
 	PartitionBies []TablePartitionBy `pulumi:"partitionBies"`
+	// Table settings
+	Settings map[string]string `pulumi:"settings"`
 }
 
 // The set of arguments for constructing a Table resource.
@@ -161,6 +169,8 @@ type TableArgs struct {
 	OrderBies pulumi.StringArrayInput
 	// Partition Key to split data
 	PartitionBies TablePartitionByArrayInput
+	// Table settings
+	Settings pulumi.StringMapInput
 }
 
 func (TableArgs) ElementType() reflect.Type {
@@ -293,6 +303,11 @@ func (o TableOutput) OrderBies() pulumi.StringArrayOutput {
 // Partition Key to split data
 func (o TableOutput) PartitionBies() TablePartitionByArrayOutput {
 	return o.ApplyT(func(v *Table) TablePartitionByArrayOutput { return v.PartitionBies }).(TablePartitionByArrayOutput)
+}
+
+// Table settings
+func (o TableOutput) Settings() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *Table) pulumi.StringMapOutput { return v.Settings }).(pulumi.StringMapOutput)
 }
 
 type TableArrayOutput struct{ *pulumi.OutputState }

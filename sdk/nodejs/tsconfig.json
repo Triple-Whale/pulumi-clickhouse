@@ -25,6 +25,7 @@
         "types/input.ts",
         "types/output.ts",
         "user.ts",
-        "utilities.ts"
+        "utilities.ts",
+        "view.ts"
     ]
 }

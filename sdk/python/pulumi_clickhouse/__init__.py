@@ -11,6 +11,7 @@ from .provider import *
 from .role import *
 from .table import *
 from .user import *
+from .view import *
 from ._inputs import *
 from . import outputs
 
@@ -54,6 +55,14 @@ _utilities.register(
   "fqn": "pulumi_clickhouse",
   "classes": {
    "clickhouse:index/user:User": "User"
+  }
+ },
+ {
+  "pkg": "clickhouse",
+  "mod": "index/view",
+  "fqn": "pulumi_clickhouse",
+  "classes": {
+   "clickhouse:index/view:View": "View"
   }
  }
 ]

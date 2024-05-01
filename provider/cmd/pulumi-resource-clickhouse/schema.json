@@ -435,6 +435,13 @@
                         "$ref": "#/types/clickhouse:index/TablePartitionBy:TablePartitionBy"
                     },
                     "description": "Partition Key to split data\n"
+                },
+                "settings": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Table settings\n"
                 }
             },
             "required": [
@@ -499,6 +506,14 @@
                         "$ref": "#/types/clickhouse:index/TablePartitionBy:TablePartitionBy"
                     },
                     "description": "Partition Key to split data\n",
+                    "willReplaceOnChanges": true
+                },
+                "settings": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Table settings\n",
                     "willReplaceOnChanges": true
                 }
             },
@@ -566,6 +581,14 @@
                         },
                         "description": "Partition Key to split data\n",
                         "willReplaceOnChanges": true
+                    },
+                    "settings": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "description": "Table settings\n",
+                        "willReplaceOnChanges": true
                     }
                 },
                 "type": "object"
@@ -631,6 +654,125 @@
                             "type": "string"
                         },
                         "description": "User role\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "clickhouse:index/view:View": {
+            "properties": {
+                "cluster": {
+                    "type": "string",
+                    "description": "Cluster Name\n"
+                },
+                "comment": {
+                    "type": "string",
+                    "description": "View comment, it will be codified in a json along with come metadata information (like cluster name in case of\nclustering)\n"
+                },
+                "database": {
+                    "type": "string",
+                    "description": "DB Name where the view will bellow\n"
+                },
+                "materialized": {
+                    "type": "boolean",
+                    "description": "Is materialized view\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "View Name\n"
+                },
+                "query": {
+                    "type": "string",
+                    "description": "View query\n"
+                },
+                "toTable": {
+                    "type": "string",
+                    "description": "For materialized view - destination table\n"
+                }
+            },
+            "required": [
+                "database",
+                "name",
+                "query"
+            ],
+            "inputProperties": {
+                "cluster": {
+                    "type": "string",
+                    "description": "Cluster Name\n",
+                    "willReplaceOnChanges": true
+                },
+                "comment": {
+                    "type": "string",
+                    "description": "View comment, it will be codified in a json along with come metadata information (like cluster name in case of\nclustering)\n",
+                    "willReplaceOnChanges": true
+                },
+                "database": {
+                    "type": "string",
+                    "description": "DB Name where the view will bellow\n",
+                    "willReplaceOnChanges": true
+                },
+                "materialized": {
+                    "type": "boolean",
+                    "description": "Is materialized view\n",
+                    "willReplaceOnChanges": true
+                },
+                "name": {
+                    "type": "string",
+                    "description": "View Name\n",
+                    "willReplaceOnChanges": true
+                },
+                "query": {
+                    "type": "string",
+                    "description": "View query\n",
+                    "willReplaceOnChanges": true
+                },
+                "toTable": {
+                    "type": "string",
+                    "description": "For materialized view - destination table\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "database",
+                "query"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering View resources.\n",
+                "properties": {
+                    "cluster": {
+                        "type": "string",
+                        "description": "Cluster Name\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "comment": {
+                        "type": "string",
+                        "description": "View comment, it will be codified in a json along with come metadata information (like cluster name in case of\nclustering)\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "database": {
+                        "type": "string",
+                        "description": "DB Name where the view will bellow\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "materialized": {
+                        "type": "boolean",
+                        "description": "Is materialized view\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "View Name\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "query": {
+                        "type": "string",
+                        "description": "View query\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "toTable": {
+                        "type": "string",
+                        "description": "For materialized view - destination table\n",
+                        "willReplaceOnChanges": true
                     }
                 },
                 "type": "object"

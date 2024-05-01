@@ -69,6 +69,12 @@ namespace Pulumi.Clickhouse
         [Output("partitionBies")]
         public Output<ImmutableArray<Outputs.TablePartitionBy>> PartitionBies { get; private set; } = null!;
 
+        /// <summary>
+        /// Table settings
+        /// </summary>
+        [Output("settings")]
+        public Output<ImmutableDictionary<string, string>?> Settings { get; private set; } = null!;
+
 
         /// <summary>
         /// Create a Table resource with the given unique name, arguments, and options.
@@ -194,6 +200,18 @@ namespace Pulumi.Clickhouse
             set => _partitionBies = value;
         }
 
+        [Input("settings")]
+        private InputMap<string>? _settings;
+
+        /// <summary>
+        /// Table settings
+        /// </summary>
+        public InputMap<string> Settings
+        {
+            get => _settings ?? (_settings = new InputMap<string>());
+            set => _settings = value;
+        }
+
         public TableArgs()
         {
         }
@@ -278,6 +296,18 @@ namespace Pulumi.Clickhouse
         {
             get => _partitionBies ?? (_partitionBies = new InputList<Inputs.TablePartitionByGetArgs>());
             set => _partitionBies = value;
+        }
+
+        [Input("settings")]
+        private InputMap<string>? _settings;
+
+        /// <summary>
+        /// Table settings
+        /// </summary>
+        public InputMap<string> Settings
+        {
+            get => _settings ?? (_settings = new InputMap<string>());
+            set => _settings = value;
         }
 
         public TableState()

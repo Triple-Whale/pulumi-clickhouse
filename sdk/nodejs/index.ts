@@ -35,6 +35,11 @@ export type User = import("./user").User;
 export const User: typeof import("./user").User = null as any;
 utilities.lazyLoad(exports, ["User"], () => require("./user"));
 
+export { ViewArgs, ViewState } from "./view";
+export type View = import("./view").View;
+export const View: typeof import("./view").View = null as any;
+utilities.lazyLoad(exports, ["View"], () => require("./view"));
+
 
 // Export sub-modules:
 import * as config from "./config";
@@ -57,6 +62,8 @@ const _module = {
                 return new Table(name, <any>undefined, { urn })
             case "clickhouse:index/user:User":
                 return new User(name, <any>undefined, { urn })
+            case "clickhouse:index/view:View":
+                return new View(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -66,6 +73,7 @@ pulumi.runtime.registerResourceModule("clickhouse", "index/db", _module)
 pulumi.runtime.registerResourceModule("clickhouse", "index/role", _module)
 pulumi.runtime.registerResourceModule("clickhouse", "index/table", _module)
 pulumi.runtime.registerResourceModule("clickhouse", "index/user", _module)
+pulumi.runtime.registerResourceModule("clickhouse", "index/view", _module)
 pulumi.runtime.registerResourcePackage("clickhouse", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {

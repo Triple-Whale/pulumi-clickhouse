@@ -73,6 +73,10 @@ export class Table extends pulumi.CustomResource {
      * Partition Key to split data
      */
     public readonly partitionBies!: pulumi.Output<outputs.TablePartitionBy[] | undefined>;
+    /**
+     * Table settings
+     */
+    public readonly settings!: pulumi.Output<{[key: string]: string} | undefined>;
 
     /**
      * Create a Table resource with the given unique name, arguments, and options.
@@ -96,6 +100,7 @@ export class Table extends pulumi.CustomResource {
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["orderBies"] = state ? state.orderBies : undefined;
             resourceInputs["partitionBies"] = state ? state.partitionBies : undefined;
+            resourceInputs["settings"] = state ? state.settings : undefined;
         } else {
             const args = argsOrState as TableArgs | undefined;
             if ((!args || args.database === undefined) && !opts.urn) {
@@ -116,6 +121,7 @@ export class Table extends pulumi.CustomResource {
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["orderBies"] = args ? args.orderBies : undefined;
             resourceInputs["partitionBies"] = args ? args.partitionBies : undefined;
+            resourceInputs["settings"] = args ? args.settings : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Table.__pulumiType, name, resourceInputs, opts);
@@ -162,6 +168,10 @@ export interface TableState {
      * Partition Key to split data
      */
     partitionBies?: pulumi.Input<pulumi.Input<inputs.TablePartitionBy>[]>;
+    /**
+     * Table settings
+     */
+    settings?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
 }
 
 /**
@@ -204,4 +214,8 @@ export interface TableArgs {
      * Partition Key to split data
      */
     partitionBies?: pulumi.Input<pulumi.Input<inputs.TablePartitionBy>[]>;
+    /**
+     * Table settings
+     */
+    settings?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
 }

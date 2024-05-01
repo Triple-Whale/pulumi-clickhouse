@@ -36,6 +36,9 @@
                         "maxItemsOne": false
                     }
                 }
+            },
+            "clickhouse_view": {
+                "current": "clickhouse:index/view:View"
             }
         },
         "datasources": {
@@ -55,7 +58,8 @@
             "clickhouse:index/db:Db": "clickhouse_db",
             "clickhouse:index/role:Role": "clickhouse_role",
             "clickhouse:index/table:Table": "clickhouse_table",
-            "clickhouse:index/user:User": "clickhouse_user"
+            "clickhouse:index/user:User": "clickhouse_user",
+            "clickhouse:index/view:View": "clickhouse_view"
         },
         "functions": {
             "clickhouse:index/getDbs:getDbs": "clickhouse_dbs"
@@ -77,6 +81,9 @@
                 "engineParams": "engine_params",
                 "orderBies": "order_by",
                 "partitionBies": "partition_by"
+            },
+            "clickhouse:index/view:View": {
+                "toTable": "to_table"
             },
             "clickhouse:index:Provider": {
                 "defaultCluster": "default_cluster"

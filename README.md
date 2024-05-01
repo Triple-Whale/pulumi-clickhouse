@@ -1,7 +1,11 @@
 # TripleWhale
 ## Build
 ```
+# one time
 make prepare NAME=clickhouse REPOSITORY=github.com/Triple-Whale/pulumi-clickhouse ORG=triplewhale
+
+cd provider && go mod tidy && cd -
+make tfgen
 git tag v0.0.2
 make provider
 make build_sdks

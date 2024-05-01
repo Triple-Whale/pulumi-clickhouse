@@ -29,6 +29,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Table{}
 	case "clickhouse:index/user:User":
 		r = &User{}
+	case "clickhouse:index/view:View":
+		r = &View{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -78,6 +80,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"clickhouse",
 		"index/user",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"clickhouse",
+		"index/view",
 		&module{version},
 	)
 	pulumi.RegisterResourcePackage(

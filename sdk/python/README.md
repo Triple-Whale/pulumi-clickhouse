@@ -1,3 +1,28 @@
+# TripleWhale
+## Build
+```
+make prepare NAME=clickhouse REPOSITORY=github.com/Triple-Whale/pulumi-clickhouse ORG=triplewhale
+git tag v0.0.2
+make provider
+make build_sdks
+```
+
+## Publish npm package
+```
+npm config -g set @tw:registry https://us-central1-npm.pkg.dev/shofifi/npm-packages/
+cd sdk/nodejs/bin
+open package.json, fix package name and version
+npm publish
+```
+
+## Publish provider binary
+```
+goreleaser build --rm-dist --skip=validate
+cd dist/pulumi-clickhouse_darwin_amd64_v1/
+tar -zcvf pulumi-resource-clickhouse-v0.0.6-darwin-arm64.tar.gz pulumi-resource-clickhouse
+gsutil cp pulumi-resource-clickhouse-v0.0.6-darwin-arm64.tar.gz  gs://pulumi-shofifi/clickhouse/
+```
+
 # Terraform Bridge Provider Boilerplate
 
 This repository contains boilerplate code for building a new Pulumi provider which wraps an existing Terraform provider.  
