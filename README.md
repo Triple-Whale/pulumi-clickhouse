@@ -9,6 +9,7 @@
 ```
 ### Publish
 ```
+commit changes
 git tag v1.X
 git push --tags
 ```
