@@ -13,10 +13,19 @@ namespace Pulumi.Clickhouse.Inputs
     public sealed class TableColumnGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
+        /// </summary>
+        [Input("comment")]
+        public Input<string>? Comment { get; set; }
+
+        /// <summary>
         /// Column Name
         /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
+
+        [Input("nullable")]
+        public Input<bool>? Nullable { get; set; }
 
         /// <summary>
         /// Column Type

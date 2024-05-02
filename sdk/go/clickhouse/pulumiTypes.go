@@ -14,8 +14,11 @@ import (
 var _ = internal.GetEnvOrDefault
 
 type TableColumn struct {
+	// Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
+	Comment *string `pulumi:"comment"`
 	// Column Name
-	Name string `pulumi:"name"`
+	Name     string `pulumi:"name"`
+	Nullable *bool  `pulumi:"nullable"`
 	// Column Type
 	Type string `pulumi:"type"`
 }
@@ -32,8 +35,11 @@ type TableColumnInput interface {
 }
 
 type TableColumnArgs struct {
+	// Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
+	Comment pulumi.StringPtrInput `pulumi:"comment"`
 	// Column Name
-	Name pulumi.StringInput `pulumi:"name"`
+	Name     pulumi.StringInput  `pulumi:"name"`
+	Nullable pulumi.BoolPtrInput `pulumi:"nullable"`
 	// Column Type
 	Type pulumi.StringInput `pulumi:"type"`
 }
@@ -89,9 +95,18 @@ func (o TableColumnOutput) ToTableColumnOutputWithContext(ctx context.Context) T
 	return o
 }
 
+// Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
+func (o TableColumnOutput) Comment() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TableColumn) *string { return v.Comment }).(pulumi.StringPtrOutput)
+}
+
 // Column Name
 func (o TableColumnOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v TableColumn) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o TableColumnOutput) Nullable() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v TableColumn) *bool { return v.Nullable }).(pulumi.BoolPtrOutput)
 }
 
 // Column Type

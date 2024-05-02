@@ -18,13 +18,20 @@ __all__ = [
 class TableColumnArgs:
     def __init__(__self__, *,
                  name: pulumi.Input[str],
-                 type: pulumi.Input[str]):
+                 type: pulumi.Input[str],
+                 comment: Optional[pulumi.Input[str]] = None,
+                 nullable: Optional[pulumi.Input[bool]] = None):
         """
         :param pulumi.Input[str] name: Column Name
         :param pulumi.Input[str] type: Column Type
+        :param pulumi.Input[str] comment: Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
         """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "type", type)
+        if comment is not None:
+            pulumi.set(__self__, "comment", comment)
+        if nullable is not None:
+            pulumi.set(__self__, "nullable", nullable)
 
     @property
     @pulumi.getter
@@ -49,6 +56,27 @@ class TableColumnArgs:
     @type.setter
     def type(self, value: pulumi.Input[str]):
         pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter
+    def comment(self) -> Optional[pulumi.Input[str]]:
+        """
+        Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
+        """
+        return pulumi.get(self, "comment")
+
+    @comment.setter
+    def comment(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "comment", value)
+
+    @property
+    @pulumi.getter
+    def nullable(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "nullable")
+
+    @nullable.setter
+    def nullable(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "nullable", value)
 
 
 @pulumi.input_type

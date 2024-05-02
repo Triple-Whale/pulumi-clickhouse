@@ -1,30 +1,51 @@
 # TripleWhale
-## Build
+## terraform-provider-clickhouse
+### Dev
+```
+<repo base> make install
+<example dir> rm .terraform.lock.hcl
+<example dir> terraform init
+<example dir> terraform apply
+```
+### Publish
+```
+git tag v1.X
+git push --tags
+```
+
+## pulumi-clickhouse
+### Build
 ```
 # one time
 make prepare NAME=clickhouse REPOSITORY=github.com/Triple-Whale/pulumi-clickhouse ORG=triplewhale
 
+in go.mod, update to v1.X
 cd provider && go mod tidy && cd -
-make tfgen
-git tag v0.0.2
-make provider
-make build_sdks
+make tfgen && make provider && make build_sdks
+git tag v0.0.Y
+git push --tags
 ```
 
-## Publish npm package
-```
-npm config -g set @tw:registry https://us-central1-npm.pkg.dev/shofifi/npm-packages/
-cd sdk/nodejs/bin
-open package.json, fix package name and version
-npm publish
-```
-
-## Publish provider binary
+### Publish provider binary
 ```
 goreleaser build --rm-dist --skip=validate
 cd dist/pulumi-clickhouse_darwin_amd64_v1/
-tar -zcvf pulumi-resource-clickhouse-v0.0.6-darwin-arm64.tar.gz pulumi-resource-clickhouse
-gsutil cp pulumi-resource-clickhouse-v0.0.6-darwin-arm64.tar.gz  gs://pulumi-shofifi/clickhouse/
+tar -zcvf pulumi-resource-clickhouse-v0.0.12-darwin-arm64.tar.gz pulumi-resource-clickhouse
+gsutil cp pulumi-resource-clickhouse-v0.0.12-darwin-arm64.tar.gz  gs://pulumi-shofifi/clickhouse/
+```
+
+### Publish npm package
+```
+npm config -g set @tw:registry https://us-central1-npm.pkg.dev/shofifi/npm-packages/
+cd sdk/nodejs/bin
+open package.json, fix package name (@tw/pulumi-clickhouse) and version (whatever you set above)
+npm publish
+```
+
+## triplewhale/backend-packages/packages/pulumi
+```
+tw i @tw/pulumi-clickhouse@latest
+...
 ```
 
 # Terraform Bridge Provider Boilerplate

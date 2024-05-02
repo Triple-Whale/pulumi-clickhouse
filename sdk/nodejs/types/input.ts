@@ -7,9 +7,14 @@ import * as outputs from "../types/output";
 
 export interface TableColumn {
     /**
+     * Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
+     */
+    comment?: pulumi.Input<string>;
+    /**
      * Column Name
      */
     name: pulumi.Input<string>;
+    nullable?: pulumi.Input<boolean>;
     /**
      * Column Type
      */
