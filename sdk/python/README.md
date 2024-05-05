@@ -9,6 +9,7 @@
 ```
 ### Publish
 ```
+commit changes
 git tag v1.X
 git push --tags
 ```
@@ -22,7 +23,7 @@ make prepare NAME=clickhouse REPOSITORY=github.com/Triple-Whale/pulumi-clickhous
 in go.mod, update to v1.X
 cd provider && go mod tidy && cd -
 make tfgen && make provider && make build_sdks
-git tag
+git tag v0.0.Y
 git push --tags
 ```
 
@@ -30,8 +31,12 @@ git push --tags
 ```
 goreleaser build --rm-dist --skip=validate
 cd dist/pulumi-clickhouse_darwin_amd64_v1/
-tar -zcvf pulumi-resource-clickhouse-v0.0.12-darwin-arm64.tar.gz pulumi-resource-clickhouse
-gsutil cp pulumi-resource-clickhouse-v0.0.12-darwin-arm64.tar.gz  gs://pulumi-shofifi/clickhouse/
+tar -zcvf pulumi-resource-clickhouse-v0.0.15-darwin-arm64.tar.gz pulumi-resource-clickhouse
+gsutil cp pulumi-resource-clickhouse-v0.0.15-darwin-arm64.tar.gz gs://pulumi-shofifi/clickhouse/
+
+cd dist/pulumi-clickhouse_linux_amd64_v1
+tar -zcvf pulumi-resource-clickhouse-v0.0.15-linux-amd64.tar.gz pulumi-resource-clickhouse
+gsutil cp pulumi-resource-clickhouse-v0.0.15-linux-amd64.tar.gz gs://pulumi-shofifi/clickhouse/
 ```
 
 ### Publish npm package
