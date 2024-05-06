@@ -21,6 +21,9 @@
                     "engine_params": {
                         "maxItemsOne": false
                     },
+                    "index": {
+                        "maxItemsOne": false
+                    },
                     "order_by": {
                         "maxItemsOne": false
                     },
@@ -79,6 +82,7 @@
             "clickhouse:index/table:Table": {
                 "columns": "column",
                 "engineParams": "engine_params",
+                "indices": "index",
                 "orderBies": "order_by",
                 "partitionBies": "partition_by"
             },

@@ -52,6 +52,12 @@ namespace Pulumi.Clickhouse
         public Output<ImmutableArray<string>> EngineParams { get; private set; } = null!;
 
         /// <summary>
+        /// Index
+        /// </summary>
+        [Output("indices")]
+        public Output<ImmutableArray<Outputs.TableIndex>> Indices { get; private set; } = null!;
+
+        /// <summary>
         /// Column Name
         /// </summary>
         [Output("name")]
@@ -170,6 +176,18 @@ namespace Pulumi.Clickhouse
             set => _engineParams = value;
         }
 
+        [Input("indices")]
+        private InputList<Inputs.TableIndexArgs>? _indices;
+
+        /// <summary>
+        /// Index
+        /// </summary>
+        public InputList<Inputs.TableIndexArgs> Indices
+        {
+            get => _indices ?? (_indices = new InputList<Inputs.TableIndexArgs>());
+            set => _indices = value;
+        }
+
         /// <summary>
         /// Column Name
         /// </summary>
@@ -266,6 +284,18 @@ namespace Pulumi.Clickhouse
         {
             get => _engineParams ?? (_engineParams = new InputList<string>());
             set => _engineParams = value;
+        }
+
+        [Input("indices")]
+        private InputList<Inputs.TableIndexGetArgs>? _indices;
+
+        /// <summary>
+        /// Index
+        /// </summary>
+        public InputList<Inputs.TableIndexGetArgs> Indices
+        {
+            get => _indices ?? (_indices = new InputList<Inputs.TableIndexGetArgs>());
+            set => _indices = value;
         }
 
         /// <summary>

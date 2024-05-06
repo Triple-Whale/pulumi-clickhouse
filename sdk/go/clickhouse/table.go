@@ -28,6 +28,8 @@ type Table struct {
 	Engine pulumi.StringOutput `pulumi:"engine"`
 	// Engine params in case the engine type requires them
 	EngineParams pulumi.StringArrayOutput `pulumi:"engineParams"`
+	// Index
+	Indices TableIndexArrayOutput `pulumi:"indices"`
 	// Column Name
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Order by columns to use as sorting key
@@ -89,6 +91,8 @@ type tableState struct {
 	Engine *string `pulumi:"engine"`
 	// Engine params in case the engine type requires them
 	EngineParams []string `pulumi:"engineParams"`
+	// Index
+	Indices []TableIndex `pulumi:"indices"`
 	// Column Name
 	Name *string `pulumi:"name"`
 	// Order by columns to use as sorting key
@@ -112,6 +116,8 @@ type TableState struct {
 	Engine pulumi.StringPtrInput
 	// Engine params in case the engine type requires them
 	EngineParams pulumi.StringArrayInput
+	// Index
+	Indices TableIndexArrayInput
 	// Column Name
 	Name pulumi.StringPtrInput
 	// Order by columns to use as sorting key
@@ -139,6 +145,8 @@ type tableArgs struct {
 	Engine string `pulumi:"engine"`
 	// Engine params in case the engine type requires them
 	EngineParams []string `pulumi:"engineParams"`
+	// Index
+	Indices []TableIndex `pulumi:"indices"`
 	// Column Name
 	Name *string `pulumi:"name"`
 	// Order by columns to use as sorting key
@@ -163,6 +171,8 @@ type TableArgs struct {
 	Engine pulumi.StringInput
 	// Engine params in case the engine type requires them
 	EngineParams pulumi.StringArrayInput
+	// Index
+	Indices TableIndexArrayInput
 	// Column Name
 	Name pulumi.StringPtrInput
 	// Order by columns to use as sorting key
@@ -288,6 +298,11 @@ func (o TableOutput) Engine() pulumi.StringOutput {
 // Engine params in case the engine type requires them
 func (o TableOutput) EngineParams() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Table) pulumi.StringArrayOutput { return v.EngineParams }).(pulumi.StringArrayOutput)
+}
+
+// Index
+func (o TableOutput) Indices() TableIndexArrayOutput {
+	return o.ApplyT(func(v *Table) TableIndexArrayOutput { return v.Indices }).(TableIndexArrayOutput)
 }
 
 // Column Name

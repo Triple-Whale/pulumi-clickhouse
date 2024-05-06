@@ -31,6 +31,19 @@ export interface TableColumn {
     type: string;
 }
 
+export interface TableIndex {
+    expression: string;
+    granularity?: number;
+    /**
+     * Column Name
+     */
+    name: string;
+    /**
+     * Column Type
+     */
+    type: string;
+}
+
 export interface TablePartitionBy {
     /**
      * Column to use as part of the partition key

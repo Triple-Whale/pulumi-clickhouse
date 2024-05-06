@@ -11,6 +11,7 @@ from . import _utilities
 
 __all__ = [
     'TableColumn',
+    'TableIndex',
     'TablePartitionBy',
     'GetDbsDbResult',
 ]
@@ -70,6 +71,50 @@ class TableColumn(dict):
     @pulumi.getter
     def nullable(self) -> Optional[bool]:
         return pulumi.get(self, "nullable")
+
+
+@pulumi.output_type
+class TableIndex(dict):
+    def __init__(__self__, *,
+                 expression: str,
+                 name: str,
+                 type: str,
+                 granularity: Optional[int] = None):
+        """
+        :param str name: Column Name
+        :param str type: Column Type
+        """
+        pulumi.set(__self__, "expression", expression)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "type", type)
+        if granularity is not None:
+            pulumi.set(__self__, "granularity", granularity)
+
+    @property
+    @pulumi.getter
+    def expression(self) -> str:
+        return pulumi.get(self, "expression")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Column Name
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Column Type
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def granularity(self) -> Optional[int]:
+        return pulumi.get(self, "granularity")
 
 
 @pulumi.output_type

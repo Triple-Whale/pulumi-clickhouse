@@ -22,6 +22,19 @@ export interface TableColumn {
     type: pulumi.Input<string>;
 }
 
+export interface TableIndex {
+    expression: pulumi.Input<string>;
+    granularity?: pulumi.Input<number>;
+    /**
+     * Column Name
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Column Type
+     */
+    type: pulumi.Input<string>;
+}
+
 export interface TablePartitionBy {
     /**
      * Column to use as part of the partition key

@@ -33,12 +33,12 @@ git push --tags
 ```
 goreleaser build --rm-dist --skip=validate
 cd dist/pulumi-clickhouse_darwin_amd64_v1/
-tar -zcvf pulumi-resource-clickhouse-v0.0.16-darwin-arm64.tar.gz pulumi-resource-clickhouse
-gsutil cp pulumi-resource-clickhouse-v0.0.16-darwin-arm64.tar.gz gs://pulumi-shofifi/clickhouse/
+tar -zcvf pulumi-resource-clickhouse-v0.0.17-darwin-arm64.tar.gz pulumi-resource-clickhouse
+gsutil cp pulumi-resource-clickhouse-v0.0.17-darwin-arm64.tar.gz gs://pulumi-shofifi/clickhouse/
 
 cd dist/pulumi-clickhouse_linux_amd64_v1
-tar -zcvf pulumi-resource-clickhouse-v0.0.16-linux-amd64.tar.gz pulumi-resource-clickhouse
-gsutil cp pulumi-resource-clickhouse-v0.0.16-linux-amd64.tar.gz gs://pulumi-shofifi/clickhouse/
+tar -zcvf pulumi-resource-clickhouse-v0.0.17-linux-amd64.tar.gz pulumi-resource-clickhouse
+gsutil cp pulumi-resource-clickhouse-v0.0.17-linux-amd64.tar.gz gs://pulumi-shofifi/clickhouse/
 ```
 
 ### Publish npm package
@@ -46,7 +46,7 @@ gsutil cp pulumi-resource-clickhouse-v0.0.16-linux-amd64.tar.gz gs://pulumi-shof
 npm config -g set @tw:registry https://us-central1-npm.pkg.dev/shofifi/npm-packages/
 cd sdk/nodejs/bin
 open package.json, fix package name (@tw/pulumi-clickhouse) and version (whatever you set above)
-npm publish
+tw auth && npm publish
 ```
 
 ## triplewhale/backend-packages/packages/pulumi

@@ -22,6 +22,7 @@ class TableArgs:
                  cluster: Optional[pulumi.Input[str]] = None,
                  columns: Optional[pulumi.Input[Sequence[pulumi.Input['TableColumnArgs']]]] = None,
                  comment: Optional[pulumi.Input[str]] = None,
+                 indices: Optional[pulumi.Input[Sequence[pulumi.Input['TableIndexArgs']]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  order_bies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  partition_bies: Optional[pulumi.Input[Sequence[pulumi.Input['TablePartitionByArgs']]]] = None,
@@ -34,6 +35,7 @@ class TableArgs:
         :param pulumi.Input[str] cluster: Cluster Name, it is required for Replicated or Distributed tables and forbidden in other case
         :param pulumi.Input[Sequence[pulumi.Input['TableColumnArgs']]] columns: Column
         :param pulumi.Input[str] comment: Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
+        :param pulumi.Input[Sequence[pulumi.Input['TableIndexArgs']]] indices: Index
         :param pulumi.Input[str] name: Column Name
         :param pulumi.Input[Sequence[pulumi.Input[str]]] order_bies: Order by columns to use as sorting key
         :param pulumi.Input[Sequence[pulumi.Input['TablePartitionByArgs']]] partition_bies: Partition Key to split data
@@ -48,6 +50,8 @@ class TableArgs:
             pulumi.set(__self__, "columns", columns)
         if comment is not None:
             pulumi.set(__self__, "comment", comment)
+        if indices is not None:
+            pulumi.set(__self__, "indices", indices)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if order_bies is not None:
@@ -131,6 +135,18 @@ class TableArgs:
 
     @property
     @pulumi.getter
+    def indices(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['TableIndexArgs']]]]:
+        """
+        Index
+        """
+        return pulumi.get(self, "indices")
+
+    @indices.setter
+    def indices(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['TableIndexArgs']]]]):
+        pulumi.set(self, "indices", value)
+
+    @property
+    @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
         Column Name
@@ -187,6 +203,7 @@ class _TableState:
                  database: Optional[pulumi.Input[str]] = None,
                  engine: Optional[pulumi.Input[str]] = None,
                  engine_params: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 indices: Optional[pulumi.Input[Sequence[pulumi.Input['TableIndexArgs']]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  order_bies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  partition_bies: Optional[pulumi.Input[Sequence[pulumi.Input['TablePartitionByArgs']]]] = None,
@@ -199,6 +216,7 @@ class _TableState:
         :param pulumi.Input[str] database: DB Name where the table will bellow
         :param pulumi.Input[str] engine: Table engine type (Supported types so far: Distributed, ReplicatedReplacingMergeTree, ReplacingMergeTree)
         :param pulumi.Input[Sequence[pulumi.Input[str]]] engine_params: Engine params in case the engine type requires them
+        :param pulumi.Input[Sequence[pulumi.Input['TableIndexArgs']]] indices: Index
         :param pulumi.Input[str] name: Column Name
         :param pulumi.Input[Sequence[pulumi.Input[str]]] order_bies: Order by columns to use as sorting key
         :param pulumi.Input[Sequence[pulumi.Input['TablePartitionByArgs']]] partition_bies: Partition Key to split data
@@ -216,6 +234,8 @@ class _TableState:
             pulumi.set(__self__, "engine", engine)
         if engine_params is not None:
             pulumi.set(__self__, "engine_params", engine_params)
+        if indices is not None:
+            pulumi.set(__self__, "indices", indices)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if order_bies is not None:
@@ -299,6 +319,18 @@ class _TableState:
 
     @property
     @pulumi.getter
+    def indices(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['TableIndexArgs']]]]:
+        """
+        Index
+        """
+        return pulumi.get(self, "indices")
+
+    @indices.setter
+    def indices(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['TableIndexArgs']]]]):
+        pulumi.set(self, "indices", value)
+
+    @property
+    @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
         Column Name
@@ -357,6 +389,7 @@ class Table(pulumi.CustomResource):
                  database: Optional[pulumi.Input[str]] = None,
                  engine: Optional[pulumi.Input[str]] = None,
                  engine_params: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 indices: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TableIndexArgs']]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  order_bies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  partition_bies: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TablePartitionByArgs']]]]] = None,
@@ -373,6 +406,7 @@ class Table(pulumi.CustomResource):
         :param pulumi.Input[str] database: DB Name where the table will bellow
         :param pulumi.Input[str] engine: Table engine type (Supported types so far: Distributed, ReplicatedReplacingMergeTree, ReplacingMergeTree)
         :param pulumi.Input[Sequence[pulumi.Input[str]]] engine_params: Engine params in case the engine type requires them
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TableIndexArgs']]]] indices: Index
         :param pulumi.Input[str] name: Column Name
         :param pulumi.Input[Sequence[pulumi.Input[str]]] order_bies: Order by columns to use as sorting key
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TablePartitionByArgs']]]] partition_bies: Partition Key to split data
@@ -408,6 +442,7 @@ class Table(pulumi.CustomResource):
                  database: Optional[pulumi.Input[str]] = None,
                  engine: Optional[pulumi.Input[str]] = None,
                  engine_params: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 indices: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TableIndexArgs']]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  order_bies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  partition_bies: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TablePartitionByArgs']]]]] = None,
@@ -433,6 +468,7 @@ class Table(pulumi.CustomResource):
             if engine_params is None and not opts.urn:
                 raise TypeError("Missing required property 'engine_params'")
             __props__.__dict__["engine_params"] = engine_params
+            __props__.__dict__["indices"] = indices
             __props__.__dict__["name"] = name
             __props__.__dict__["order_bies"] = order_bies
             __props__.__dict__["partition_bies"] = partition_bies
@@ -453,6 +489,7 @@ class Table(pulumi.CustomResource):
             database: Optional[pulumi.Input[str]] = None,
             engine: Optional[pulumi.Input[str]] = None,
             engine_params: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            indices: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TableIndexArgs']]]]] = None,
             name: Optional[pulumi.Input[str]] = None,
             order_bies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             partition_bies: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TablePartitionByArgs']]]]] = None,
@@ -470,6 +507,7 @@ class Table(pulumi.CustomResource):
         :param pulumi.Input[str] database: DB Name where the table will bellow
         :param pulumi.Input[str] engine: Table engine type (Supported types so far: Distributed, ReplicatedReplacingMergeTree, ReplacingMergeTree)
         :param pulumi.Input[Sequence[pulumi.Input[str]]] engine_params: Engine params in case the engine type requires them
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TableIndexArgs']]]] indices: Index
         :param pulumi.Input[str] name: Column Name
         :param pulumi.Input[Sequence[pulumi.Input[str]]] order_bies: Order by columns to use as sorting key
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TablePartitionByArgs']]]] partition_bies: Partition Key to split data
@@ -485,6 +523,7 @@ class Table(pulumi.CustomResource):
         __props__.__dict__["database"] = database
         __props__.__dict__["engine"] = engine
         __props__.__dict__["engine_params"] = engine_params
+        __props__.__dict__["indices"] = indices
         __props__.__dict__["name"] = name
         __props__.__dict__["order_bies"] = order_bies
         __props__.__dict__["partition_bies"] = partition_bies
@@ -538,6 +577,14 @@ class Table(pulumi.CustomResource):
         Engine params in case the engine type requires them
         """
         return pulumi.get(self, "engine_params")
+
+    @property
+    @pulumi.getter
+    def indices(self) -> pulumi.Output[Optional[Sequence['outputs.TableIndex']]]:
+        """
+        Index
+        """
+        return pulumi.get(self, "indices")
 
     @property
     @pulumi.getter

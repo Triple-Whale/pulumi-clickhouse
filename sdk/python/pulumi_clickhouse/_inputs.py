@@ -11,6 +11,7 @@ from . import _utilities
 
 __all__ = [
     'TableColumnArgs',
+    'TableIndexArgs',
     'TablePartitionByArgs',
 ]
 
@@ -89,6 +90,66 @@ class TableColumnArgs:
     @nullable.setter
     def nullable(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "nullable", value)
+
+
+@pulumi.input_type
+class TableIndexArgs:
+    def __init__(__self__, *,
+                 expression: pulumi.Input[str],
+                 name: pulumi.Input[str],
+                 type: pulumi.Input[str],
+                 granularity: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] name: Column Name
+        :param pulumi.Input[str] type: Column Type
+        """
+        pulumi.set(__self__, "expression", expression)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "type", type)
+        if granularity is not None:
+            pulumi.set(__self__, "granularity", granularity)
+
+    @property
+    @pulumi.getter
+    def expression(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "expression")
+
+    @expression.setter
+    def expression(self, value: pulumi.Input[str]):
+        pulumi.set(self, "expression", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        Column Name
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        Column Type
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter
+    def granularity(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "granularity")
+
+    @granularity.setter
+    def granularity(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "granularity", value)
 
 
 @pulumi.input_type

@@ -62,6 +62,10 @@ export class Table extends pulumi.CustomResource {
      */
     public readonly engineParams!: pulumi.Output<string[]>;
     /**
+     * Index
+     */
+    public readonly indices!: pulumi.Output<outputs.TableIndex[] | undefined>;
+    /**
      * Column Name
      */
     public readonly name!: pulumi.Output<string>;
@@ -97,6 +101,7 @@ export class Table extends pulumi.CustomResource {
             resourceInputs["database"] = state ? state.database : undefined;
             resourceInputs["engine"] = state ? state.engine : undefined;
             resourceInputs["engineParams"] = state ? state.engineParams : undefined;
+            resourceInputs["indices"] = state ? state.indices : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["orderBies"] = state ? state.orderBies : undefined;
             resourceInputs["partitionBies"] = state ? state.partitionBies : undefined;
@@ -118,6 +123,7 @@ export class Table extends pulumi.CustomResource {
             resourceInputs["database"] = args ? args.database : undefined;
             resourceInputs["engine"] = args ? args.engine : undefined;
             resourceInputs["engineParams"] = args ? args.engineParams : undefined;
+            resourceInputs["indices"] = args ? args.indices : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["orderBies"] = args ? args.orderBies : undefined;
             resourceInputs["partitionBies"] = args ? args.partitionBies : undefined;
@@ -156,6 +162,10 @@ export interface TableState {
      * Engine params in case the engine type requires them
      */
     engineParams?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Index
+     */
+    indices?: pulumi.Input<pulumi.Input<inputs.TableIndex>[]>;
     /**
      * Column Name
      */
@@ -202,6 +212,10 @@ export interface TableArgs {
      * Engine params in case the engine type requires them
      */
     engineParams: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Index
+     */
+    indices?: pulumi.Input<pulumi.Input<inputs.TableIndex>[]>;
     /**
      * Column Name
      */

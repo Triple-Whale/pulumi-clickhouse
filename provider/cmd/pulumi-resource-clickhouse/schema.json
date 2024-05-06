@@ -116,6 +116,34 @@
                 "type"
             ]
         },
+        "clickhouse:index/TableIndex:TableIndex": {
+            "properties": {
+                "expression": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "granularity": {
+                    "type": "integer",
+                    "willReplaceOnChanges": true
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Column Name\n",
+                    "willReplaceOnChanges": true
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Column Type\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "type": "object",
+            "required": [
+                "expression",
+                "name",
+                "type"
+            ]
+        },
         "clickhouse:index/TablePartitionBy:TablePartitionBy": {
             "properties": {
                 "by": {
@@ -431,6 +459,13 @@
                     },
                     "description": "Engine params in case the engine type requires them\n"
                 },
+                "indices": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/clickhouse:index/TableIndex:TableIndex"
+                    },
+                    "description": "Index\n"
+                },
                 "name": {
                     "type": "string",
                     "description": "Column Name\n"
@@ -498,6 +533,14 @@
                         "type": "string"
                     },
                     "description": "Engine params in case the engine type requires them\n",
+                    "willReplaceOnChanges": true
+                },
+                "indices": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/clickhouse:index/TableIndex:TableIndex"
+                    },
+                    "description": "Index\n",
                     "willReplaceOnChanges": true
                 },
                 "name": {
@@ -572,6 +615,14 @@
                             "type": "string"
                         },
                         "description": "Engine params in case the engine type requires them\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "indices": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/clickhouse:index/TableIndex:TableIndex"
+                        },
+                        "description": "Index\n",
                         "willReplaceOnChanges": true
                     },
                     "name": {

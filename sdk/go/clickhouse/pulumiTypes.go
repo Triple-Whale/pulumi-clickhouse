@@ -140,6 +140,124 @@ func (o TableColumnArrayOutput) Index(i pulumi.IntInput) TableColumnOutput {
 	}).(TableColumnOutput)
 }
 
+type TableIndex struct {
+	Expression  string `pulumi:"expression"`
+	Granularity *int   `pulumi:"granularity"`
+	// Column Name
+	Name string `pulumi:"name"`
+	// Column Type
+	Type string `pulumi:"type"`
+}
+
+// TableIndexInput is an input type that accepts TableIndexArgs and TableIndexOutput values.
+// You can construct a concrete instance of `TableIndexInput` via:
+//
+//	TableIndexArgs{...}
+type TableIndexInput interface {
+	pulumi.Input
+
+	ToTableIndexOutput() TableIndexOutput
+	ToTableIndexOutputWithContext(context.Context) TableIndexOutput
+}
+
+type TableIndexArgs struct {
+	Expression  pulumi.StringInput `pulumi:"expression"`
+	Granularity pulumi.IntPtrInput `pulumi:"granularity"`
+	// Column Name
+	Name pulumi.StringInput `pulumi:"name"`
+	// Column Type
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (TableIndexArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TableIndex)(nil)).Elem()
+}
+
+func (i TableIndexArgs) ToTableIndexOutput() TableIndexOutput {
+	return i.ToTableIndexOutputWithContext(context.Background())
+}
+
+func (i TableIndexArgs) ToTableIndexOutputWithContext(ctx context.Context) TableIndexOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TableIndexOutput)
+}
+
+// TableIndexArrayInput is an input type that accepts TableIndexArray and TableIndexArrayOutput values.
+// You can construct a concrete instance of `TableIndexArrayInput` via:
+//
+//	TableIndexArray{ TableIndexArgs{...} }
+type TableIndexArrayInput interface {
+	pulumi.Input
+
+	ToTableIndexArrayOutput() TableIndexArrayOutput
+	ToTableIndexArrayOutputWithContext(context.Context) TableIndexArrayOutput
+}
+
+type TableIndexArray []TableIndexInput
+
+func (TableIndexArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TableIndex)(nil)).Elem()
+}
+
+func (i TableIndexArray) ToTableIndexArrayOutput() TableIndexArrayOutput {
+	return i.ToTableIndexArrayOutputWithContext(context.Background())
+}
+
+func (i TableIndexArray) ToTableIndexArrayOutputWithContext(ctx context.Context) TableIndexArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TableIndexArrayOutput)
+}
+
+type TableIndexOutput struct{ *pulumi.OutputState }
+
+func (TableIndexOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TableIndex)(nil)).Elem()
+}
+
+func (o TableIndexOutput) ToTableIndexOutput() TableIndexOutput {
+	return o
+}
+
+func (o TableIndexOutput) ToTableIndexOutputWithContext(ctx context.Context) TableIndexOutput {
+	return o
+}
+
+func (o TableIndexOutput) Expression() pulumi.StringOutput {
+	return o.ApplyT(func(v TableIndex) string { return v.Expression }).(pulumi.StringOutput)
+}
+
+func (o TableIndexOutput) Granularity() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TableIndex) *int { return v.Granularity }).(pulumi.IntPtrOutput)
+}
+
+// Column Name
+func (o TableIndexOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v TableIndex) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Column Type
+func (o TableIndexOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v TableIndex) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type TableIndexArrayOutput struct{ *pulumi.OutputState }
+
+func (TableIndexArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TableIndex)(nil)).Elem()
+}
+
+func (o TableIndexArrayOutput) ToTableIndexArrayOutput() TableIndexArrayOutput {
+	return o
+}
+
+func (o TableIndexArrayOutput) ToTableIndexArrayOutputWithContext(ctx context.Context) TableIndexArrayOutput {
+	return o
+}
+
+func (o TableIndexArrayOutput) Index(i pulumi.IntInput) TableIndexOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TableIndex {
+		return vs[0].([]TableIndex)[vs[1].(int)]
+	}).(TableIndexOutput)
+}
+
 type TablePartitionBy struct {
 	// Column to use as part of the partition key
 	By string `pulumi:"by"`
@@ -373,12 +491,16 @@ func (o GetDbsDbArrayOutput) Index(i pulumi.IntInput) GetDbsDbOutput {
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*TableColumnInput)(nil)).Elem(), TableColumnArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TableColumnArrayInput)(nil)).Elem(), TableColumnArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TableIndexInput)(nil)).Elem(), TableIndexArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TableIndexArrayInput)(nil)).Elem(), TableIndexArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TablePartitionByInput)(nil)).Elem(), TablePartitionByArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TablePartitionByArrayInput)(nil)).Elem(), TablePartitionByArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDbsDbInput)(nil)).Elem(), GetDbsDbArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDbsDbArrayInput)(nil)).Elem(), GetDbsDbArray{})
 	pulumi.RegisterOutputType(TableColumnOutput{})
 	pulumi.RegisterOutputType(TableColumnArrayOutput{})
+	pulumi.RegisterOutputType(TableIndexOutput{})
+	pulumi.RegisterOutputType(TableIndexArrayOutput{})
 	pulumi.RegisterOutputType(TablePartitionByOutput{})
 	pulumi.RegisterOutputType(TablePartitionByArrayOutput{})
 	pulumi.RegisterOutputType(GetDbsDbOutput{})
