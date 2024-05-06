@@ -20,6 +20,7 @@ class TableColumn(dict):
     def __init__(__self__, *,
                  name: str,
                  type: str,
+                 array: Optional[bool] = None,
                  comment: Optional[str] = None,
                  nullable: Optional[bool] = None):
         """
@@ -29,6 +30,8 @@ class TableColumn(dict):
         """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "type", type)
+        if array is not None:
+            pulumi.set(__self__, "array", array)
         if comment is not None:
             pulumi.set(__self__, "comment", comment)
         if nullable is not None:
@@ -49,6 +52,11 @@ class TableColumn(dict):
         Column Type
         """
         return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def array(self) -> Optional[bool]:
+        return pulumi.get(self, "array")
 
     @property
     @pulumi.getter

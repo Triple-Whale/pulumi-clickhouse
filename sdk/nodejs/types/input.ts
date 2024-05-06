@@ -6,6 +6,7 @@ import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
 export interface TableColumn {
+    array?: pulumi.Input<boolean>;
     /**
      * Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
      */

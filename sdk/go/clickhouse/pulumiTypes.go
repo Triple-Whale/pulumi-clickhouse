@@ -14,6 +14,7 @@ import (
 var _ = internal.GetEnvOrDefault
 
 type TableColumn struct {
+	Array *bool `pulumi:"array"`
 	// Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
 	Comment *string `pulumi:"comment"`
 	// Column Name
@@ -35,6 +36,7 @@ type TableColumnInput interface {
 }
 
 type TableColumnArgs struct {
+	Array pulumi.BoolPtrInput `pulumi:"array"`
 	// Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
 	Comment pulumi.StringPtrInput `pulumi:"comment"`
 	// Column Name
@@ -93,6 +95,10 @@ func (o TableColumnOutput) ToTableColumnOutput() TableColumnOutput {
 
 func (o TableColumnOutput) ToTableColumnOutputWithContext(ctx context.Context) TableColumnOutput {
 	return o
+}
+
+func (o TableColumnOutput) Array() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v TableColumn) *bool { return v.Array }).(pulumi.BoolPtrOutput)
 }
 
 // Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)

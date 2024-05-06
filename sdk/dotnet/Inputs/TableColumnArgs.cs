@@ -12,6 +12,9 @@ namespace Pulumi.Clickhouse.Inputs
 
     public sealed class TableColumnArgs : global::Pulumi.ResourceArgs
     {
+        [Input("array")]
+        public Input<bool>? Array { get; set; }
+
         /// <summary>
         /// Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
         /// </summary>

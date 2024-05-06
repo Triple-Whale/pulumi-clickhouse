@@ -19,6 +19,7 @@ class TableColumnArgs:
     def __init__(__self__, *,
                  name: pulumi.Input[str],
                  type: pulumi.Input[str],
+                 array: Optional[pulumi.Input[bool]] = None,
                  comment: Optional[pulumi.Input[str]] = None,
                  nullable: Optional[pulumi.Input[bool]] = None):
         """
@@ -28,6 +29,8 @@ class TableColumnArgs:
         """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "type", type)
+        if array is not None:
+            pulumi.set(__self__, "array", array)
         if comment is not None:
             pulumi.set(__self__, "comment", comment)
         if nullable is not None:
@@ -56,6 +59,15 @@ class TableColumnArgs:
     @type.setter
     def type(self, value: pulumi.Input[str]):
         pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter
+    def array(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "array")
+
+    @array.setter
+    def array(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "array", value)
 
     @property
     @pulumi.getter
