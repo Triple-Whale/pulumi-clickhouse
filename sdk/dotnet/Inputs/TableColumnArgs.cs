@@ -12,9 +12,6 @@ namespace Pulumi.Clickhouse.Inputs
 
     public sealed class TableColumnArgs : global::Pulumi.ResourceArgs
     {
-        [Input("array")]
-        public Input<bool>? Array { get; set; }
-
         /// <summary>
         /// Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
         /// </summary>
@@ -26,9 +23,6 @@ namespace Pulumi.Clickhouse.Inputs
         /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
-
-        [Input("nullable")]
-        public Input<bool>? Nullable { get; set; }
 
         /// <summary>
         /// Column Type

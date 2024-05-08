@@ -15,7 +15,6 @@ export interface GetDbsDb {
 }
 
 export interface TableColumn {
-    array?: boolean;
     /**
      * Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
      */
@@ -24,7 +23,6 @@ export interface TableColumn {
      * Column Name
      */
     name: string;
-    nullable?: boolean;
     /**
      * Column Type
      */

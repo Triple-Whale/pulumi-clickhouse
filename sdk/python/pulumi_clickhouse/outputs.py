@@ -21,9 +21,7 @@ class TableColumn(dict):
     def __init__(__self__, *,
                  name: str,
                  type: str,
-                 array: Optional[bool] = None,
-                 comment: Optional[str] = None,
-                 nullable: Optional[bool] = None):
+                 comment: Optional[str] = None):
         """
         :param str name: Column Name
         :param str type: Column Type
@@ -31,12 +29,8 @@ class TableColumn(dict):
         """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "type", type)
-        if array is not None:
-            pulumi.set(__self__, "array", array)
         if comment is not None:
             pulumi.set(__self__, "comment", comment)
-        if nullable is not None:
-            pulumi.set(__self__, "nullable", nullable)
 
     @property
     @pulumi.getter
@@ -56,21 +50,11 @@ class TableColumn(dict):
 
     @property
     @pulumi.getter
-    def array(self) -> Optional[bool]:
-        return pulumi.get(self, "array")
-
-    @property
-    @pulumi.getter
     def comment(self) -> Optional[str]:
         """
         Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
         """
         return pulumi.get(self, "comment")
-
-    @property
-    @pulumi.getter
-    def nullable(self) -> Optional[bool]:
-        return pulumi.get(self, "nullable")
 
 
 @pulumi.output_type

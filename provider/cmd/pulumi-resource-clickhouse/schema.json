@@ -86,10 +86,6 @@
     "types": {
         "clickhouse:index/TableColumn:TableColumn": {
             "properties": {
-                "array": {
-                    "type": "boolean",
-                    "willReplaceOnChanges": true
-                },
                 "comment": {
                     "type": "string",
                     "description": "Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)\n",
@@ -98,10 +94,6 @@
                 "name": {
                     "type": "string",
                     "description": "Column Name\n",
-                    "willReplaceOnChanges": true
-                },
-                "nullable": {
-                    "type": "boolean",
                     "willReplaceOnChanges": true
                 },
                 "type": {

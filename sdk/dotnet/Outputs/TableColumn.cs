@@ -13,7 +13,6 @@ namespace Pulumi.Clickhouse.Outputs
     [OutputType]
     public sealed class TableColumn
     {
-        public readonly bool? Array;
         /// <summary>
         /// Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
         /// </summary>
@@ -22,7 +21,6 @@ namespace Pulumi.Clickhouse.Outputs
         /// Column Name
         /// </summary>
         public readonly string Name;
-        public readonly bool? Nullable;
         /// <summary>
         /// Column Type
         /// </summary>
@@ -30,20 +28,14 @@ namespace Pulumi.Clickhouse.Outputs
 
         [OutputConstructor]
         private TableColumn(
-            bool? array,
-
             string? comment,
 
             string name,
 
-            bool? nullable,
-
             string type)
         {
-            Array = array;
             Comment = comment;
             Name = name;
-            Nullable = nullable;
             Type = type;
         }
     }
