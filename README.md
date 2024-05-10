@@ -12,6 +12,7 @@
 ```
 commit changes
 git tag v1.X
+git push
 git push --tags
 ```
 
@@ -26,6 +27,7 @@ cd provider && go mod tidy && cd -
 make tfgen && make provider && make build_sdks
 commit
 git tag v0.0.Y
+git push
 git push --tags
 ```
 
@@ -33,12 +35,12 @@ git push --tags
 ```
 goreleaser build --rm-dist --skip=validate
 cd dist/pulumi-clickhouse_darwin_amd64_v1/
-tar -zcvf pulumi-resource-clickhouse-v0.0.20-darwin-arm64.tar.gz pulumi-resource-clickhouse
-gsutil cp pulumi-resource-clickhouse-v0.0.20-darwin-arm64.tar.gz gs://pulumi-shofifi/clickhouse/
+tar -zcvf pulumi-resource-clickhouse-v0.0.21-darwin-arm64.tar.gz pulumi-resource-clickhouse
+gsutil cp pulumi-resource-clickhouse-v0.0.21-darwin-arm64.tar.gz gs://pulumi-shofifi/clickhouse/
 cd ../..
 cd dist/pulumi-clickhouse_linux_amd64_v1
-tar -zcvf pulumi-resource-clickhouse-v0.0.20-linux-amd64.tar.gz pulumi-resource-clickhouse
-gsutil cp pulumi-resource-clickhouse-v0.0.20-linux-amd64.tar.gz gs://pulumi-shofifi/clickhouse/
+tar -zcvf pulumi-resource-clickhouse-v0.0.21-linux-amd64.tar.gz pulumi-resource-clickhouse
+gsutil cp pulumi-resource-clickhouse-v0.0.21-linux-amd64.tar.gz gs://pulumi-shofifi/clickhouse/
 cd ../..
 ```
 
