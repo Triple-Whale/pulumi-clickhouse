@@ -35,12 +35,12 @@ git push --tags
 ```
 goreleaser build --rm-dist --skip=validate
 cd dist/pulumi-clickhouse_darwin_amd64_v1/
-tar -zcvf pulumi-resource-clickhouse-v0.0.26-darwin-arm64.tar.gz pulumi-resource-clickhouse
-gsutil cp pulumi-resource-clickhouse-v0.0.26-darwin-arm64.tar.gz gs://pulumi-shofifi/clickhouse/
+tar -zcvf pulumi-resource-clickhouse-v0.0.27-darwin-arm64.tar.gz pulumi-resource-clickhouse
+gsutil cp pulumi-resource-clickhouse-v0.0.27-darwin-arm64.tar.gz gs://pulumi-shofifi/clickhouse/
 cd ../..
 cd dist/pulumi-clickhouse_linux_amd64_v1
-tar -zcvf pulumi-resource-clickhouse-v0.0.26-linux-amd64.tar.gz pulumi-resource-clickhouse
-gsutil cp pulumi-resource-clickhouse-v0.0.26-linux-amd64.tar.gz gs://pulumi-shofifi/clickhouse/
+tar -zcvf pulumi-resource-clickhouse-v0.0.27-linux-amd64.tar.gz pulumi-resource-clickhouse
+gsutil cp pulumi-resource-clickhouse-v0.0.27-linux-amd64.tar.gz gs://pulumi-shofifi/clickhouse/
 cd ../..
 ```
 
