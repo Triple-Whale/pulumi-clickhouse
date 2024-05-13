@@ -32,14 +32,3 @@ export interface TableIndex {
      */
     type: pulumi.Input<string>;
 }
-
-export interface TablePartitionBy {
-    /**
-     * Column to use as part of the partition key
-     */
-    by: pulumi.Input<string>;
-    /**
-     * Partition function, could be empty or one of following: toYYYYMM, toYYYYMMDD or toYYYYMMDDhhmmss
-     */
-    partitionFunction?: pulumi.Input<string>;
-}

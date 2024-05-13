@@ -68,9 +68,6 @@
             "clickhouse:index/getDbs:getDbs": "clickhouse_dbs"
         },
         "renamedProperties": {
-            "clickhouse:index/TablePartitionBy:TablePartitionBy": {
-                "partitionFunction": "partition_function"
-            },
             "clickhouse:index/db:Db": {
                 "dataPath": "data_path",
                 "metadataPath": "metadata_path"

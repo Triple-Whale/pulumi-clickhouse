@@ -12,7 +12,6 @@ from . import _utilities
 __all__ = [
     'TableColumn',
     'TableIndex',
-    'TablePartitionBy',
     'GetDbsDbResult',
 ]
 
@@ -99,53 +98,6 @@ class TableIndex(dict):
     @pulumi.getter
     def granularity(self) -> Optional[int]:
         return pulumi.get(self, "granularity")
-
-
-@pulumi.output_type
-class TablePartitionBy(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "partitionFunction":
-            suggest = "partition_function"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in TablePartitionBy. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        TablePartitionBy.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        TablePartitionBy.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 by: str,
-                 partition_function: Optional[str] = None):
-        """
-        :param str by: Column to use as part of the partition key
-        :param str partition_function: Partition function, could be empty or one of following: toYYYYMM, toYYYYMMDD or toYYYYMMDDhhmmss
-        """
-        pulumi.set(__self__, "by", by)
-        if partition_function is not None:
-            pulumi.set(__self__, "partition_function", partition_function)
-
-    @property
-    @pulumi.getter
-    def by(self) -> str:
-        """
-        Column to use as part of the partition key
-        """
-        return pulumi.get(self, "by")
-
-    @property
-    @pulumi.getter(name="partitionFunction")
-    def partition_function(self) -> Optional[str]:
-        """
-        Partition function, could be empty or one of following: toYYYYMM, toYYYYMMDD or toYYYYMMDDhhmmss
-        """
-        return pulumi.get(self, "partition_function")
 
 
 @pulumi.output_type

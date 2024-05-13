@@ -12,7 +12,6 @@ from . import _utilities
 __all__ = [
     'TableColumnArgs',
     'TableIndexArgs',
-    'TablePartitionByArgs',
 ]
 
 @pulumi.input_type
@@ -126,43 +125,5 @@ class TableIndexArgs:
     @granularity.setter
     def granularity(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "granularity", value)
-
-
-@pulumi.input_type
-class TablePartitionByArgs:
-    def __init__(__self__, *,
-                 by: pulumi.Input[str],
-                 partition_function: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[str] by: Column to use as part of the partition key
-        :param pulumi.Input[str] partition_function: Partition function, could be empty or one of following: toYYYYMM, toYYYYMMDD or toYYYYMMDDhhmmss
-        """
-        pulumi.set(__self__, "by", by)
-        if partition_function is not None:
-            pulumi.set(__self__, "partition_function", partition_function)
-
-    @property
-    @pulumi.getter
-    def by(self) -> pulumi.Input[str]:
-        """
-        Column to use as part of the partition key
-        """
-        return pulumi.get(self, "by")
-
-    @by.setter
-    def by(self, value: pulumi.Input[str]):
-        pulumi.set(self, "by", value)
-
-    @property
-    @pulumi.getter(name="partitionFunction")
-    def partition_function(self) -> Optional[pulumi.Input[str]]:
-        """
-        Partition function, could be empty or one of following: toYYYYMM, toYYYYMMDD or toYYYYMMDDhhmmss
-        """
-        return pulumi.get(self, "partition_function")
-
-    @partition_function.setter
-    def partition_function(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "partition_function", value)
 
 

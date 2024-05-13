@@ -35,7 +35,7 @@ type Table struct {
 	// Order by columns to use as sorting key
 	OrderBies pulumi.StringArrayOutput `pulumi:"orderBies"`
 	// Partition Key to split data
-	PartitionBies TablePartitionByArrayOutput `pulumi:"partitionBies"`
+	PartitionBies pulumi.StringArrayOutput `pulumi:"partitionBies"`
 	// Table settings
 	Settings pulumi.StringMapOutput `pulumi:"settings"`
 }
@@ -98,7 +98,7 @@ type tableState struct {
 	// Order by columns to use as sorting key
 	OrderBies []string `pulumi:"orderBies"`
 	// Partition Key to split data
-	PartitionBies []TablePartitionBy `pulumi:"partitionBies"`
+	PartitionBies []string `pulumi:"partitionBies"`
 	// Table settings
 	Settings map[string]string `pulumi:"settings"`
 }
@@ -123,7 +123,7 @@ type TableState struct {
 	// Order by columns to use as sorting key
 	OrderBies pulumi.StringArrayInput
 	// Partition Key to split data
-	PartitionBies TablePartitionByArrayInput
+	PartitionBies pulumi.StringArrayInput
 	// Table settings
 	Settings pulumi.StringMapInput
 }
@@ -152,7 +152,7 @@ type tableArgs struct {
 	// Order by columns to use as sorting key
 	OrderBies []string `pulumi:"orderBies"`
 	// Partition Key to split data
-	PartitionBies []TablePartitionBy `pulumi:"partitionBies"`
+	PartitionBies []string `pulumi:"partitionBies"`
 	// Table settings
 	Settings map[string]string `pulumi:"settings"`
 }
@@ -178,7 +178,7 @@ type TableArgs struct {
 	// Order by columns to use as sorting key
 	OrderBies pulumi.StringArrayInput
 	// Partition Key to split data
-	PartitionBies TablePartitionByArrayInput
+	PartitionBies pulumi.StringArrayInput
 	// Table settings
 	Settings pulumi.StringMapInput
 }
@@ -316,8 +316,8 @@ func (o TableOutput) OrderBies() pulumi.StringArrayOutput {
 }
 
 // Partition Key to split data
-func (o TableOutput) PartitionBies() TablePartitionByArrayOutput {
-	return o.ApplyT(func(v *Table) TablePartitionByArrayOutput { return v.PartitionBies }).(TablePartitionByArrayOutput)
+func (o TableOutput) PartitionBies() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Table) pulumi.StringArrayOutput { return v.PartitionBies }).(pulumi.StringArrayOutput)
 }
 
 // Table settings

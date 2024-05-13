@@ -136,24 +136,6 @@
                 "type"
             ]
         },
-        "clickhouse:index/TablePartitionBy:TablePartitionBy": {
-            "properties": {
-                "by": {
-                    "type": "string",
-                    "description": "Column to use as part of the partition key\n",
-                    "willReplaceOnChanges": true
-                },
-                "partitionFunction": {
-                    "type": "string",
-                    "description": "Partition function, could be empty or one of following: toYYYYMM, toYYYYMMDD or toYYYYMMDDhhmmss\n",
-                    "willReplaceOnChanges": true
-                }
-            },
-            "type": "object",
-            "required": [
-                "by"
-            ]
-        },
         "clickhouse:index/getDbsDb:getDbsDb": {
             "properties": {
                 "comment": {
@@ -472,7 +454,7 @@
                 "partitionBies": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/types/clickhouse:index/TablePartitionBy:TablePartitionBy"
+                        "type": "string"
                     },
                     "description": "Partition Key to split data\n"
                 },
@@ -551,7 +533,7 @@
                 "partitionBies": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/types/clickhouse:index/TablePartitionBy:TablePartitionBy"
+                        "type": "string"
                     },
                     "description": "Partition Key to split data\n",
                     "willReplaceOnChanges": true
@@ -633,7 +615,7 @@
                     "partitionBies": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/types/clickhouse:index/TablePartitionBy:TablePartitionBy"
+                            "type": "string"
                         },
                         "description": "Partition Key to split data\n",
                         "willReplaceOnChanges": true

@@ -76,7 +76,7 @@ export class Table extends pulumi.CustomResource {
     /**
      * Partition Key to split data
      */
-    public readonly partitionBies!: pulumi.Output<outputs.TablePartitionBy[] | undefined>;
+    public readonly partitionBies!: pulumi.Output<string[] | undefined>;
     /**
      * Table settings
      */
@@ -177,7 +177,7 @@ export interface TableState {
     /**
      * Partition Key to split data
      */
-    partitionBies?: pulumi.Input<pulumi.Input<inputs.TablePartitionBy>[]>;
+    partitionBies?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * Table settings
      */
@@ -227,7 +227,7 @@ export interface TableArgs {
     /**
      * Partition Key to split data
      */
-    partitionBies?: pulumi.Input<pulumi.Input<inputs.TablePartitionBy>[]>;
+    partitionBies?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * Table settings
      */

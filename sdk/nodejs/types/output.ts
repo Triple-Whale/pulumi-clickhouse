@@ -42,14 +42,3 @@ export interface TableIndex {
     type: string;
 }
 
-export interface TablePartitionBy {
-    /**
-     * Column to use as part of the partition key
-     */
-    by: string;
-    /**
-     * Partition function, could be empty or one of following: toYYYYMM, toYYYYMMDD or toYYYYMMDDhhmmss
-     */
-    partitionFunction?: string;
-}
-
