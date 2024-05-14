@@ -10,8 +10,8 @@ export interface TableColumn {
      * Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
      */
     comment?: pulumi.Input<string>;
-    defaultExpression?: pulumi.Input<string>;
-    defaultKind?: pulumi.Input<string>;
+    defaultexpression?: pulumi.Input<string>;
+    defaultkind?: pulumi.Input<string>;
     /**
      * Column Name
      */
