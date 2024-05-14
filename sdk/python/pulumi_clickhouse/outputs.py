@@ -12,15 +12,37 @@ from . import _utilities
 __all__ = [
     'TableColumn',
     'TableIndex',
+    'TablePartitionBy',
     'GetDbsDbResult',
 ]
 
 @pulumi.output_type
 class TableColumn(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "defaultExpression":
+            suggest = "default_expression"
+        elif key == "defaultKind":
+            suggest = "default_kind"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in TableColumn. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        TableColumn.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        TableColumn.__key_warning(key)
+        return super().get(key, default)
+
     def __init__(__self__, *,
                  name: str,
                  type: str,
-                 comment: Optional[str] = None):
+                 comment: Optional[str] = None,
+                 default_expression: Optional[str] = None,
+                 default_kind: Optional[str] = None):
         """
         :param str name: Column Name
         :param str type: Column Type
@@ -30,6 +52,10 @@ class TableColumn(dict):
         pulumi.set(__self__, "type", type)
         if comment is not None:
             pulumi.set(__self__, "comment", comment)
+        if default_expression is not None:
+            pulumi.set(__self__, "default_expression", default_expression)
+        if default_kind is not None:
+            pulumi.set(__self__, "default_kind", default_kind)
 
     @property
     @pulumi.getter
@@ -54,6 +80,16 @@ class TableColumn(dict):
         Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
         """
         return pulumi.get(self, "comment")
+
+    @property
+    @pulumi.getter(name="defaultExpression")
+    def default_expression(self) -> Optional[str]:
+        return pulumi.get(self, "default_expression")
+
+    @property
+    @pulumi.getter(name="defaultKind")
+    def default_kind(self) -> Optional[str]:
+        return pulumi.get(self, "default_kind")
 
 
 @pulumi.output_type
@@ -98,6 +134,61 @@ class TableIndex(dict):
     @pulumi.getter
     def granularity(self) -> Optional[int]:
         return pulumi.get(self, "granularity")
+
+
+@pulumi.output_type
+class TablePartitionBy(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "partitionFunction":
+            suggest = "partition_function"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in TablePartitionBy. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        TablePartitionBy.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        TablePartitionBy.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 by: str,
+                 mod: Optional[str] = None,
+                 partition_function: Optional[str] = None):
+        """
+        :param str by: Column to use as part of the partition key
+        :param str partition_function: Partition function, could be empty or one of following: toYYYYMM, toYYYYMMDD or toYYYYMMDDhhmmss
+        """
+        pulumi.set(__self__, "by", by)
+        if mod is not None:
+            pulumi.set(__self__, "mod", mod)
+        if partition_function is not None:
+            pulumi.set(__self__, "partition_function", partition_function)
+
+    @property
+    @pulumi.getter
+    def by(self) -> str:
+        """
+        Column to use as part of the partition key
+        """
+        return pulumi.get(self, "by")
+
+    @property
+    @pulumi.getter
+    def mod(self) -> Optional[str]:
+        return pulumi.get(self, "mod")
+
+    @property
+    @pulumi.getter(name="partitionFunction")
+    def partition_function(self) -> Optional[str]:
+        """
+        Partition function, could be empty or one of following: toYYYYMM, toYYYYMMDD or toYYYYMMDDhhmmss
+        """
+        return pulumi.get(self, "partition_function")
 
 
 @pulumi.output_type

@@ -18,6 +18,12 @@ namespace Pulumi.Clickhouse.Inputs
         [Input("comment")]
         public Input<string>? Comment { get; set; }
 
+        [Input("defaultExpression")]
+        public Input<string>? DefaultExpression { get; set; }
+
+        [Input("defaultKind")]
+        public Input<string>? DefaultKind { get; set; }
+
         /// <summary>
         /// Column Name
         /// </summary>

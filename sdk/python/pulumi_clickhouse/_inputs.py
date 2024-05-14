@@ -12,6 +12,7 @@ from . import _utilities
 __all__ = [
     'TableColumnArgs',
     'TableIndexArgs',
+    'TablePartitionByArgs',
 ]
 
 @pulumi.input_type
@@ -19,7 +20,9 @@ class TableColumnArgs:
     def __init__(__self__, *,
                  name: pulumi.Input[str],
                  type: pulumi.Input[str],
-                 comment: Optional[pulumi.Input[str]] = None):
+                 comment: Optional[pulumi.Input[str]] = None,
+                 default_expression: Optional[pulumi.Input[str]] = None,
+                 default_kind: Optional[pulumi.Input[str]] = None):
         """
         :param pulumi.Input[str] name: Column Name
         :param pulumi.Input[str] type: Column Type
@@ -29,6 +32,10 @@ class TableColumnArgs:
         pulumi.set(__self__, "type", type)
         if comment is not None:
             pulumi.set(__self__, "comment", comment)
+        if default_expression is not None:
+            pulumi.set(__self__, "default_expression", default_expression)
+        if default_kind is not None:
+            pulumi.set(__self__, "default_kind", default_kind)
 
     @property
     @pulumi.getter
@@ -65,6 +72,24 @@ class TableColumnArgs:
     @comment.setter
     def comment(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "comment", value)
+
+    @property
+    @pulumi.getter(name="defaultExpression")
+    def default_expression(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "default_expression")
+
+    @default_expression.setter
+    def default_expression(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "default_expression", value)
+
+    @property
+    @pulumi.getter(name="defaultKind")
+    def default_kind(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "default_kind")
+
+    @default_kind.setter
+    def default_kind(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "default_kind", value)
 
 
 @pulumi.input_type
@@ -125,5 +150,55 @@ class TableIndexArgs:
     @granularity.setter
     def granularity(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "granularity", value)
+
+
+@pulumi.input_type
+class TablePartitionByArgs:
+    def __init__(__self__, *,
+                 by: pulumi.Input[str],
+                 mod: Optional[pulumi.Input[str]] = None,
+                 partition_function: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] by: Column to use as part of the partition key
+        :param pulumi.Input[str] partition_function: Partition function, could be empty or one of following: toYYYYMM, toYYYYMMDD or toYYYYMMDDhhmmss
+        """
+        pulumi.set(__self__, "by", by)
+        if mod is not None:
+            pulumi.set(__self__, "mod", mod)
+        if partition_function is not None:
+            pulumi.set(__self__, "partition_function", partition_function)
+
+    @property
+    @pulumi.getter
+    def by(self) -> pulumi.Input[str]:
+        """
+        Column to use as part of the partition key
+        """
+        return pulumi.get(self, "by")
+
+    @by.setter
+    def by(self, value: pulumi.Input[str]):
+        pulumi.set(self, "by", value)
+
+    @property
+    @pulumi.getter
+    def mod(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "mod")
+
+    @mod.setter
+    def mod(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "mod", value)
+
+    @property
+    @pulumi.getter(name="partitionFunction")
+    def partition_function(self) -> Optional[pulumi.Input[str]]:
+        """
+        Partition function, could be empty or one of following: toYYYYMM, toYYYYMMDD or toYYYYMMDDhhmmss
+        """
+        return pulumi.get(self, "partition_function")
+
+    @partition_function.setter
+    def partition_function(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "partition_function", value)
 
 

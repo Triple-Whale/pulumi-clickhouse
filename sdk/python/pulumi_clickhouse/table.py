@@ -25,7 +25,7 @@ class TableArgs:
                  indices: Optional[pulumi.Input[Sequence[pulumi.Input['TableIndexArgs']]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  order_bies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 partition_bies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 partition_bies: Optional[pulumi.Input[Sequence[pulumi.Input['TablePartitionByArgs']]]] = None,
                  settings: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a Table resource.
@@ -38,7 +38,7 @@ class TableArgs:
         :param pulumi.Input[Sequence[pulumi.Input['TableIndexArgs']]] indices: Index
         :param pulumi.Input[str] name: Column Name
         :param pulumi.Input[Sequence[pulumi.Input[str]]] order_bies: Order by columns to use as sorting key
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] partition_bies: Partition Key to split data
+        :param pulumi.Input[Sequence[pulumi.Input['TablePartitionByArgs']]] partition_bies: Partition Key to split data
         :param pulumi.Input[Mapping[str, pulumi.Input[str]]] settings: Table settings
         """
         pulumi.set(__self__, "database", database)
@@ -171,14 +171,14 @@ class TableArgs:
 
     @property
     @pulumi.getter(name="partitionBies")
-    def partition_bies(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+    def partition_bies(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['TablePartitionByArgs']]]]:
         """
         Partition Key to split data
         """
         return pulumi.get(self, "partition_bies")
 
     @partition_bies.setter
-    def partition_bies(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+    def partition_bies(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['TablePartitionByArgs']]]]):
         pulumi.set(self, "partition_bies", value)
 
     @property
@@ -206,7 +206,7 @@ class _TableState:
                  indices: Optional[pulumi.Input[Sequence[pulumi.Input['TableIndexArgs']]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  order_bies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 partition_bies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 partition_bies: Optional[pulumi.Input[Sequence[pulumi.Input['TablePartitionByArgs']]]] = None,
                  settings: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering Table resources.
@@ -219,7 +219,7 @@ class _TableState:
         :param pulumi.Input[Sequence[pulumi.Input['TableIndexArgs']]] indices: Index
         :param pulumi.Input[str] name: Column Name
         :param pulumi.Input[Sequence[pulumi.Input[str]]] order_bies: Order by columns to use as sorting key
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] partition_bies: Partition Key to split data
+        :param pulumi.Input[Sequence[pulumi.Input['TablePartitionByArgs']]] partition_bies: Partition Key to split data
         :param pulumi.Input[Mapping[str, pulumi.Input[str]]] settings: Table settings
         """
         if cluster is not None:
@@ -355,14 +355,14 @@ class _TableState:
 
     @property
     @pulumi.getter(name="partitionBies")
-    def partition_bies(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+    def partition_bies(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['TablePartitionByArgs']]]]:
         """
         Partition Key to split data
         """
         return pulumi.get(self, "partition_bies")
 
     @partition_bies.setter
-    def partition_bies(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+    def partition_bies(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['TablePartitionByArgs']]]]):
         pulumi.set(self, "partition_bies", value)
 
     @property
@@ -392,7 +392,7 @@ class Table(pulumi.CustomResource):
                  indices: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TableIndexArgs']]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  order_bies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 partition_bies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 partition_bies: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TablePartitionByArgs']]]]] = None,
                  settings: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  __props__=None):
         """
@@ -409,7 +409,7 @@ class Table(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TableIndexArgs']]]] indices: Index
         :param pulumi.Input[str] name: Column Name
         :param pulumi.Input[Sequence[pulumi.Input[str]]] order_bies: Order by columns to use as sorting key
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] partition_bies: Partition Key to split data
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TablePartitionByArgs']]]] partition_bies: Partition Key to split data
         :param pulumi.Input[Mapping[str, pulumi.Input[str]]] settings: Table settings
         """
         ...
@@ -445,7 +445,7 @@ class Table(pulumi.CustomResource):
                  indices: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TableIndexArgs']]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  order_bies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 partition_bies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 partition_bies: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TablePartitionByArgs']]]]] = None,
                  settings: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -492,7 +492,7 @@ class Table(pulumi.CustomResource):
             indices: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TableIndexArgs']]]]] = None,
             name: Optional[pulumi.Input[str]] = None,
             order_bies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-            partition_bies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            partition_bies: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TablePartitionByArgs']]]]] = None,
             settings: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None) -> 'Table':
         """
         Get an existing Table resource's state with the given name, id, and optional extra
@@ -510,7 +510,7 @@ class Table(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TableIndexArgs']]]] indices: Index
         :param pulumi.Input[str] name: Column Name
         :param pulumi.Input[Sequence[pulumi.Input[str]]] order_bies: Order by columns to use as sorting key
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] partition_bies: Partition Key to split data
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TablePartitionByArgs']]]] partition_bies: Partition Key to split data
         :param pulumi.Input[Mapping[str, pulumi.Input[str]]] settings: Table settings
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -604,7 +604,7 @@ class Table(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="partitionBies")
-    def partition_bies(self) -> pulumi.Output[Optional[Sequence[str]]]:
+    def partition_bies(self) -> pulumi.Output[Optional[Sequence['outputs.TablePartitionBy']]]:
         """
         Partition Key to split data
         """

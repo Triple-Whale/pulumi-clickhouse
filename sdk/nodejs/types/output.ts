@@ -19,6 +19,8 @@ export interface TableColumn {
      * Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
      */
     comment?: string;
+    defaultExpression?: string;
+    defaultKind?: string;
     /**
      * Column Name
      */
@@ -40,5 +42,17 @@ export interface TableIndex {
      * Column Type
      */
     type: string;
+}
+
+export interface TablePartitionBy {
+    /**
+     * Column to use as part of the partition key
+     */
+    by: string;
+    mod?: string;
+    /**
+     * Partition function, could be empty or one of following: toYYYYMM, toYYYYMMDD or toYYYYMMDDhhmmss
+     */
+    partitionFunction?: string;
 }
 

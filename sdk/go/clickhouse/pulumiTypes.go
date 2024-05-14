@@ -15,7 +15,9 @@ var _ = internal.GetEnvOrDefault
 
 type TableColumn struct {
 	// Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
-	Comment *string `pulumi:"comment"`
+	Comment           *string `pulumi:"comment"`
+	DefaultExpression *string `pulumi:"defaultExpression"`
+	DefaultKind       *string `pulumi:"defaultKind"`
 	// Column Name
 	Name string `pulumi:"name"`
 	// Column Type
@@ -35,7 +37,9 @@ type TableColumnInput interface {
 
 type TableColumnArgs struct {
 	// Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
-	Comment pulumi.StringPtrInput `pulumi:"comment"`
+	Comment           pulumi.StringPtrInput `pulumi:"comment"`
+	DefaultExpression pulumi.StringPtrInput `pulumi:"defaultExpression"`
+	DefaultKind       pulumi.StringPtrInput `pulumi:"defaultKind"`
 	// Column Name
 	Name pulumi.StringInput `pulumi:"name"`
 	// Column Type
@@ -96,6 +100,14 @@ func (o TableColumnOutput) ToTableColumnOutputWithContext(ctx context.Context) T
 // Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
 func (o TableColumnOutput) Comment() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v TableColumn) *string { return v.Comment }).(pulumi.StringPtrOutput)
+}
+
+func (o TableColumnOutput) DefaultExpression() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TableColumn) *string { return v.DefaultExpression }).(pulumi.StringPtrOutput)
+}
+
+func (o TableColumnOutput) DefaultKind() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TableColumn) *string { return v.DefaultKind }).(pulumi.StringPtrOutput)
 }
 
 // Column Name
@@ -246,6 +258,118 @@ func (o TableIndexArrayOutput) Index(i pulumi.IntInput) TableIndexOutput {
 	}).(TableIndexOutput)
 }
 
+type TablePartitionBy struct {
+	// Column to use as part of the partition key
+	By  string  `pulumi:"by"`
+	Mod *string `pulumi:"mod"`
+	// Partition function, could be empty or one of following: toYYYYMM, toYYYYMMDD or toYYYYMMDDhhmmss
+	PartitionFunction *string `pulumi:"partitionFunction"`
+}
+
+// TablePartitionByInput is an input type that accepts TablePartitionByArgs and TablePartitionByOutput values.
+// You can construct a concrete instance of `TablePartitionByInput` via:
+//
+//	TablePartitionByArgs{...}
+type TablePartitionByInput interface {
+	pulumi.Input
+
+	ToTablePartitionByOutput() TablePartitionByOutput
+	ToTablePartitionByOutputWithContext(context.Context) TablePartitionByOutput
+}
+
+type TablePartitionByArgs struct {
+	// Column to use as part of the partition key
+	By  pulumi.StringInput    `pulumi:"by"`
+	Mod pulumi.StringPtrInput `pulumi:"mod"`
+	// Partition function, could be empty or one of following: toYYYYMM, toYYYYMMDD or toYYYYMMDDhhmmss
+	PartitionFunction pulumi.StringPtrInput `pulumi:"partitionFunction"`
+}
+
+func (TablePartitionByArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TablePartitionBy)(nil)).Elem()
+}
+
+func (i TablePartitionByArgs) ToTablePartitionByOutput() TablePartitionByOutput {
+	return i.ToTablePartitionByOutputWithContext(context.Background())
+}
+
+func (i TablePartitionByArgs) ToTablePartitionByOutputWithContext(ctx context.Context) TablePartitionByOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TablePartitionByOutput)
+}
+
+// TablePartitionByArrayInput is an input type that accepts TablePartitionByArray and TablePartitionByArrayOutput values.
+// You can construct a concrete instance of `TablePartitionByArrayInput` via:
+//
+//	TablePartitionByArray{ TablePartitionByArgs{...} }
+type TablePartitionByArrayInput interface {
+	pulumi.Input
+
+	ToTablePartitionByArrayOutput() TablePartitionByArrayOutput
+	ToTablePartitionByArrayOutputWithContext(context.Context) TablePartitionByArrayOutput
+}
+
+type TablePartitionByArray []TablePartitionByInput
+
+func (TablePartitionByArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TablePartitionBy)(nil)).Elem()
+}
+
+func (i TablePartitionByArray) ToTablePartitionByArrayOutput() TablePartitionByArrayOutput {
+	return i.ToTablePartitionByArrayOutputWithContext(context.Background())
+}
+
+func (i TablePartitionByArray) ToTablePartitionByArrayOutputWithContext(ctx context.Context) TablePartitionByArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TablePartitionByArrayOutput)
+}
+
+type TablePartitionByOutput struct{ *pulumi.OutputState }
+
+func (TablePartitionByOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TablePartitionBy)(nil)).Elem()
+}
+
+func (o TablePartitionByOutput) ToTablePartitionByOutput() TablePartitionByOutput {
+	return o
+}
+
+func (o TablePartitionByOutput) ToTablePartitionByOutputWithContext(ctx context.Context) TablePartitionByOutput {
+	return o
+}
+
+// Column to use as part of the partition key
+func (o TablePartitionByOutput) By() pulumi.StringOutput {
+	return o.ApplyT(func(v TablePartitionBy) string { return v.By }).(pulumi.StringOutput)
+}
+
+func (o TablePartitionByOutput) Mod() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TablePartitionBy) *string { return v.Mod }).(pulumi.StringPtrOutput)
+}
+
+// Partition function, could be empty or one of following: toYYYYMM, toYYYYMMDD or toYYYYMMDDhhmmss
+func (o TablePartitionByOutput) PartitionFunction() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TablePartitionBy) *string { return v.PartitionFunction }).(pulumi.StringPtrOutput)
+}
+
+type TablePartitionByArrayOutput struct{ *pulumi.OutputState }
+
+func (TablePartitionByArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TablePartitionBy)(nil)).Elem()
+}
+
+func (o TablePartitionByArrayOutput) ToTablePartitionByArrayOutput() TablePartitionByArrayOutput {
+	return o
+}
+
+func (o TablePartitionByArrayOutput) ToTablePartitionByArrayOutputWithContext(ctx context.Context) TablePartitionByArrayOutput {
+	return o
+}
+
+func (o TablePartitionByArrayOutput) Index(i pulumi.IntInput) TablePartitionByOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TablePartitionBy {
+		return vs[0].([]TablePartitionBy)[vs[1].(int)]
+	}).(TablePartitionByOutput)
+}
+
 type GetDbsDb struct {
 	Comment      string `pulumi:"comment"`
 	DataPath     string `pulumi:"dataPath"`
@@ -375,12 +499,16 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*TableColumnArrayInput)(nil)).Elem(), TableColumnArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TableIndexInput)(nil)).Elem(), TableIndexArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TableIndexArrayInput)(nil)).Elem(), TableIndexArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TablePartitionByInput)(nil)).Elem(), TablePartitionByArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TablePartitionByArrayInput)(nil)).Elem(), TablePartitionByArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDbsDbInput)(nil)).Elem(), GetDbsDbArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDbsDbArrayInput)(nil)).Elem(), GetDbsDbArray{})
 	pulumi.RegisterOutputType(TableColumnOutput{})
 	pulumi.RegisterOutputType(TableColumnArrayOutput{})
 	pulumi.RegisterOutputType(TableIndexOutput{})
 	pulumi.RegisterOutputType(TableIndexArrayOutput{})
+	pulumi.RegisterOutputType(TablePartitionByOutput{})
+	pulumi.RegisterOutputType(TablePartitionByArrayOutput{})
 	pulumi.RegisterOutputType(GetDbsDbOutput{})
 	pulumi.RegisterOutputType(GetDbsDbArrayOutput{})
 }

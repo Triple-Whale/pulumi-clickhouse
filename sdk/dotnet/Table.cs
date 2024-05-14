@@ -73,7 +73,7 @@ namespace Pulumi.Clickhouse
         /// Partition Key to split data
         /// </summary>
         [Output("partitionBies")]
-        public Output<ImmutableArray<string>> PartitionBies { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.TablePartitionBy>> PartitionBies { get; private set; } = null!;
 
         /// <summary>
         /// Table settings
@@ -207,14 +207,14 @@ namespace Pulumi.Clickhouse
         }
 
         [Input("partitionBies")]
-        private InputList<string>? _partitionBies;
+        private InputList<Inputs.TablePartitionByArgs>? _partitionBies;
 
         /// <summary>
         /// Partition Key to split data
         /// </summary>
-        public InputList<string> PartitionBies
+        public InputList<Inputs.TablePartitionByArgs> PartitionBies
         {
-            get => _partitionBies ?? (_partitionBies = new InputList<string>());
+            get => _partitionBies ?? (_partitionBies = new InputList<Inputs.TablePartitionByArgs>());
             set => _partitionBies = value;
         }
 
@@ -317,14 +317,14 @@ namespace Pulumi.Clickhouse
         }
 
         [Input("partitionBies")]
-        private InputList<string>? _partitionBies;
+        private InputList<Inputs.TablePartitionByGetArgs>? _partitionBies;
 
         /// <summary>
         /// Partition Key to split data
         /// </summary>
-        public InputList<string> PartitionBies
+        public InputList<Inputs.TablePartitionByGetArgs> PartitionBies
         {
-            get => _partitionBies ?? (_partitionBies = new InputList<string>());
+            get => _partitionBies ?? (_partitionBies = new InputList<Inputs.TablePartitionByGetArgs>());
             set => _partitionBies = value;
         }
 
