@@ -68,6 +68,10 @@
             "clickhouse:index/getDbs:getDbs": "clickhouse_dbs"
         },
         "renamedProperties": {
+            "clickhouse:index/TableColumn:TableColumn": {
+                "defExpression": "def_expression",
+                "defKind": "def_kind"
+            },
             "clickhouse:index/TablePartitionBy:TablePartitionBy": {
                 "partitionFunction": "partition_function"
             },

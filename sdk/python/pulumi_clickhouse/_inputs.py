@@ -21,8 +21,8 @@ class TableColumnArgs:
                  name: pulumi.Input[str],
                  type: pulumi.Input[str],
                  comment: Optional[pulumi.Input[str]] = None,
-                 defaultexpression: Optional[pulumi.Input[str]] = None,
-                 defaultkind: Optional[pulumi.Input[str]] = None):
+                 def_expression: Optional[pulumi.Input[str]] = None,
+                 def_kind: Optional[pulumi.Input[str]] = None):
         """
         :param pulumi.Input[str] name: Column Name
         :param pulumi.Input[str] type: Column Type
@@ -32,10 +32,10 @@ class TableColumnArgs:
         pulumi.set(__self__, "type", type)
         if comment is not None:
             pulumi.set(__self__, "comment", comment)
-        if defaultexpression is not None:
-            pulumi.set(__self__, "defaultexpression", defaultexpression)
-        if defaultkind is not None:
-            pulumi.set(__self__, "defaultkind", defaultkind)
+        if def_expression is not None:
+            pulumi.set(__self__, "def_expression", def_expression)
+        if def_kind is not None:
+            pulumi.set(__self__, "def_kind", def_kind)
 
     @property
     @pulumi.getter
@@ -74,22 +74,22 @@ class TableColumnArgs:
         pulumi.set(self, "comment", value)
 
     @property
-    @pulumi.getter
-    def defaultexpression(self) -> Optional[pulumi.Input[str]]:
-        return pulumi.get(self, "defaultexpression")
+    @pulumi.getter(name="defExpression")
+    def def_expression(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "def_expression")
 
-    @defaultexpression.setter
-    def defaultexpression(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "defaultexpression", value)
+    @def_expression.setter
+    def def_expression(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "def_expression", value)
 
     @property
-    @pulumi.getter
-    def defaultkind(self) -> Optional[pulumi.Input[str]]:
-        return pulumi.get(self, "defaultkind")
+    @pulumi.getter(name="defKind")
+    def def_kind(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "def_kind")
 
-    @defaultkind.setter
-    def defaultkind(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "defaultkind", value)
+    @def_kind.setter
+    def def_kind(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "def_kind", value)
 
 
 @pulumi.input_type
