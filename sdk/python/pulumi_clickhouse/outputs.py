@@ -18,12 +18,31 @@ __all__ = [
 
 @pulumi.output_type
 class TableColumn(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "defaultExpression":
+            suggest = "default_expression"
+        elif key == "defaultKind":
+            suggest = "default_kind"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in TableColumn. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        TableColumn.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        TableColumn.__key_warning(key)
+        return super().get(key, default)
+
     def __init__(__self__, *,
                  name: str,
                  type: str,
                  comment: Optional[str] = None,
-                 defaultexpression: Optional[str] = None,
-                 defaultkind: Optional[str] = None):
+                 default_expression: Optional[str] = None,
+                 default_kind: Optional[str] = None):
         """
         :param str name: Column Name
         :param str type: Column Type
@@ -33,10 +52,10 @@ class TableColumn(dict):
         pulumi.set(__self__, "type", type)
         if comment is not None:
             pulumi.set(__self__, "comment", comment)
-        if defaultexpression is not None:
-            pulumi.set(__self__, "defaultexpression", defaultexpression)
-        if defaultkind is not None:
-            pulumi.set(__self__, "defaultkind", defaultkind)
+        if default_expression is not None:
+            pulumi.set(__self__, "default_expression", default_expression)
+        if default_kind is not None:
+            pulumi.set(__self__, "default_kind", default_kind)
 
     @property
     @pulumi.getter
@@ -63,14 +82,14 @@ class TableColumn(dict):
         return pulumi.get(self, "comment")
 
     @property
-    @pulumi.getter
-    def defaultexpression(self) -> Optional[str]:
-        return pulumi.get(self, "defaultexpression")
+    @pulumi.getter(name="defaultExpression")
+    def default_expression(self) -> Optional[str]:
+        return pulumi.get(self, "default_expression")
 
     @property
-    @pulumi.getter
-    def defaultkind(self) -> Optional[str]:
-        return pulumi.get(self, "defaultkind")
+    @pulumi.getter(name="defaultKind")
+    def default_kind(self) -> Optional[str]:
+        return pulumi.get(self, "default_kind")
 
 
 @pulumi.output_type

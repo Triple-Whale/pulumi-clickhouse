@@ -16,8 +16,8 @@ var _ = internal.GetEnvOrDefault
 type TableColumn struct {
 	// Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
 	Comment           *string `pulumi:"comment"`
-	Defaultexpression *string `pulumi:"defaultexpression"`
-	Defaultkind       *string `pulumi:"defaultkind"`
+	DefaultExpression *string `pulumi:"defaultExpression"`
+	DefaultKind       *string `pulumi:"defaultKind"`
 	// Column Name
 	Name string `pulumi:"name"`
 	// Column Type
@@ -38,8 +38,8 @@ type TableColumnInput interface {
 type TableColumnArgs struct {
 	// Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
 	Comment           pulumi.StringPtrInput `pulumi:"comment"`
-	Defaultexpression pulumi.StringPtrInput `pulumi:"defaultexpression"`
-	Defaultkind       pulumi.StringPtrInput `pulumi:"defaultkind"`
+	DefaultExpression pulumi.StringPtrInput `pulumi:"defaultExpression"`
+	DefaultKind       pulumi.StringPtrInput `pulumi:"defaultKind"`
 	// Column Name
 	Name pulumi.StringInput `pulumi:"name"`
 	// Column Type
@@ -102,12 +102,12 @@ func (o TableColumnOutput) Comment() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v TableColumn) *string { return v.Comment }).(pulumi.StringPtrOutput)
 }
 
-func (o TableColumnOutput) Defaultexpression() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v TableColumn) *string { return v.Defaultexpression }).(pulumi.StringPtrOutput)
+func (o TableColumnOutput) DefaultExpression() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TableColumn) *string { return v.DefaultExpression }).(pulumi.StringPtrOutput)
 }
 
-func (o TableColumnOutput) Defaultkind() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v TableColumn) *string { return v.Defaultkind }).(pulumi.StringPtrOutput)
+func (o TableColumnOutput) DefaultKind() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TableColumn) *string { return v.DefaultKind }).(pulumi.StringPtrOutput)
 }
 
 // Column Name

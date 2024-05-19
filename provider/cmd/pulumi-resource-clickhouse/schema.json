@@ -91,11 +91,11 @@
                     "description": "Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)\n",
                     "willReplaceOnChanges": true
                 },
-                "defaultexpression": {
+                "defaultExpression": {
                     "type": "string",
                     "willReplaceOnChanges": true
                 },
-                "defaultkind": {
+                "defaultKind": {
                     "type": "string",
                     "willReplaceOnChanges": true
                 },

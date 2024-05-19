@@ -17,8 +17,8 @@ namespace Pulumi.Clickhouse.Outputs
         /// Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
         /// </summary>
         public readonly string? Comment;
-        public readonly string? Defaultexpression;
-        public readonly string? Defaultkind;
+        public readonly string? DefaultExpression;
+        public readonly string? DefaultKind;
         /// <summary>
         /// Column Name
         /// </summary>
@@ -32,17 +32,17 @@ namespace Pulumi.Clickhouse.Outputs
         private TableColumn(
             string? comment,
 
-            string? defaultexpression,
+            string? defaultExpression,
 
-            string? defaultkind,
+            string? defaultKind,
 
             string name,
 
             string type)
         {
             Comment = comment;
-            Defaultexpression = defaultexpression;
-            Defaultkind = defaultkind;
+            DefaultExpression = defaultExpression;
+            DefaultKind = defaultKind;
             Name = name;
             Type = type;
         }

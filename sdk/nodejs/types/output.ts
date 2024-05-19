@@ -19,8 +19,8 @@ export interface TableColumn {
      * Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
      */
     comment?: string;
-    defaultexpression?: string;
-    defaultkind?: string;
+    defaultExpression?: string;
+    defaultKind?: string;
     /**
      * Column Name
      */
