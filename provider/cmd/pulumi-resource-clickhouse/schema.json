@@ -88,26 +88,21 @@
             "properties": {
                 "comment": {
                     "type": "string",
-                    "description": "Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)\n",
-                    "willReplaceOnChanges": true
+                    "description": "Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)\n"
                 },
                 "defaultExpression": {
-                    "type": "string",
-                    "willReplaceOnChanges": true
+                    "type": "string"
                 },
                 "defaultKind": {
-                    "type": "string",
-                    "willReplaceOnChanges": true
+                    "type": "string"
                 },
                 "name": {
                     "type": "string",
-                    "description": "Column Name\n",
-                    "willReplaceOnChanges": true
+                    "description": "Column Name\n"
                 },
                 "type": {
                     "type": "string",
-                    "description": "Column Type\n",
-                    "willReplaceOnChanges": true
+                    "description": "Column Type\n"
                 }
             },
             "type": "object",
@@ -513,13 +508,11 @@
                     "items": {
                         "$ref": "#/types/clickhouse:index/TableColumn:TableColumn"
                     },
-                    "description": "Column\n",
-                    "willReplaceOnChanges": true
+                    "description": "Column\n"
                 },
                 "comment": {
                     "type": "string",
-                    "description": "Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)\n",
-                    "willReplaceOnChanges": true
+                    "description": "Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)\n"
                 },
                 "database": {
                     "type": "string",
@@ -595,13 +588,11 @@
                         "items": {
                             "$ref": "#/types/clickhouse:index/TableColumn:TableColumn"
                         },
-                        "description": "Column\n",
-                        "willReplaceOnChanges": true
+                        "description": "Column\n"
                     },
                     "comment": {
                         "type": "string",
-                        "description": "Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)\n",
-                        "willReplaceOnChanges": true
+                        "description": "Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)\n"
                     },
                     "database": {
                         "type": "string",
