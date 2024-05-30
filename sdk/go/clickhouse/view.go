@@ -16,20 +16,20 @@ type View struct {
 	pulumi.CustomResourceState
 
 	// Cluster Name
-	Cluster pulumi.StringPtrOutput `pulumi:"cluster"`
+	Cluster pulumi.StringOutput `pulumi:"cluster"`
 	// View comment, it will be codified in a json along with come metadata information (like cluster name in case of
 	// clustering)
 	Comment pulumi.StringPtrOutput `pulumi:"comment"`
 	// DB Name where the view will bellow
 	Database pulumi.StringOutput `pulumi:"database"`
 	// Is materialized view
-	Materialized pulumi.BoolPtrOutput `pulumi:"materialized"`
+	Materialized pulumi.BoolOutput `pulumi:"materialized"`
 	// View Name
 	Name pulumi.StringOutput `pulumi:"name"`
 	// View query
 	Query pulumi.StringOutput `pulumi:"query"`
 	// For materialized view - destination table
-	ToTable pulumi.StringPtrOutput `pulumi:"toTable"`
+	ToTable pulumi.StringOutput `pulumi:"toTable"`
 }
 
 // NewView registers a new resource with the given unique name, arguments, and options.
@@ -41,6 +41,9 @@ func NewView(ctx *pulumi.Context,
 
 	if args.Database == nil {
 		return nil, errors.New("invalid value for required argument 'Database'")
+	}
+	if args.Materialized == nil {
+		return nil, errors.New("invalid value for required argument 'Materialized'")
 	}
 	if args.Query == nil {
 		return nil, errors.New("invalid value for required argument 'Query'")
@@ -116,7 +119,7 @@ type viewArgs struct {
 	// DB Name where the view will bellow
 	Database string `pulumi:"database"`
 	// Is materialized view
-	Materialized *bool `pulumi:"materialized"`
+	Materialized bool `pulumi:"materialized"`
 	// View Name
 	Name *string `pulumi:"name"`
 	// View query
@@ -135,7 +138,7 @@ type ViewArgs struct {
 	// DB Name where the view will bellow
 	Database pulumi.StringInput
 	// Is materialized view
-	Materialized pulumi.BoolPtrInput
+	Materialized pulumi.BoolInput
 	// View Name
 	Name pulumi.StringPtrInput
 	// View query
@@ -232,8 +235,8 @@ func (o ViewOutput) ToViewOutputWithContext(ctx context.Context) ViewOutput {
 }
 
 // Cluster Name
-func (o ViewOutput) Cluster() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *View) pulumi.StringPtrOutput { return v.Cluster }).(pulumi.StringPtrOutput)
+func (o ViewOutput) Cluster() pulumi.StringOutput {
+	return o.ApplyT(func(v *View) pulumi.StringOutput { return v.Cluster }).(pulumi.StringOutput)
 }
 
 // View comment, it will be codified in a json along with come metadata information (like cluster name in case of
@@ -248,8 +251,8 @@ func (o ViewOutput) Database() pulumi.StringOutput {
 }
 
 // Is materialized view
-func (o ViewOutput) Materialized() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *View) pulumi.BoolPtrOutput { return v.Materialized }).(pulumi.BoolPtrOutput)
+func (o ViewOutput) Materialized() pulumi.BoolOutput {
+	return o.ApplyT(func(v *View) pulumi.BoolOutput { return v.Materialized }).(pulumi.BoolOutput)
 }
 
 // View Name
@@ -263,8 +266,8 @@ func (o ViewOutput) Query() pulumi.StringOutput {
 }
 
 // For materialized view - destination table
-func (o ViewOutput) ToTable() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *View) pulumi.StringPtrOutput { return v.ToTable }).(pulumi.StringPtrOutput)
+func (o ViewOutput) ToTable() pulumi.StringOutput {
+	return o.ApplyT(func(v *View) pulumi.StringOutput { return v.ToTable }).(pulumi.StringOutput)
 }
 
 type ViewArrayOutput struct{ *pulumi.OutputState }

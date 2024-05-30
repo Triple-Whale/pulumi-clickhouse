@@ -53,9 +53,6 @@ func NewTable(ctx *pulumi.Context,
 	if args.Engine == nil {
 		return nil, errors.New("invalid value for required argument 'Engine'")
 	}
-	if args.EngineParams == nil {
-		return nil, errors.New("invalid value for required argument 'EngineParams'")
-	}
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Table
 	err := ctx.RegisterResource("clickhouse:index/table:Table", name, args, &resource, opts...)

@@ -60,7 +60,7 @@ export class Table extends pulumi.CustomResource {
     /**
      * Engine params in case the engine type requires them
      */
-    public readonly engineParams!: pulumi.Output<string[]>;
+    public readonly engineParams!: pulumi.Output<string[] | undefined>;
     /**
      * Index
      */
@@ -113,9 +113,6 @@ export class Table extends pulumi.CustomResource {
             }
             if ((!args || args.engine === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'engine'");
-            }
-            if ((!args || args.engineParams === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'engineParams'");
             }
             resourceInputs["cluster"] = args ? args.cluster : undefined;
             resourceInputs["columns"] = args ? args.columns : undefined;
@@ -211,7 +208,7 @@ export interface TableArgs {
     /**
      * Engine params in case the engine type requires them
      */
-    engineParams: pulumi.Input<pulumi.Input<string>[]>;
+    engineParams?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * Index
      */

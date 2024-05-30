@@ -15,31 +15,30 @@ __all__ = ['ViewArgs', 'View']
 class ViewArgs:
     def __init__(__self__, *,
                  database: pulumi.Input[str],
+                 materialized: pulumi.Input[bool],
                  query: pulumi.Input[str],
                  cluster: Optional[pulumi.Input[str]] = None,
                  comment: Optional[pulumi.Input[str]] = None,
-                 materialized: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  to_table: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a View resource.
         :param pulumi.Input[str] database: DB Name where the view will bellow
+        :param pulumi.Input[bool] materialized: Is materialized view
         :param pulumi.Input[str] query: View query
         :param pulumi.Input[str] cluster: Cluster Name
         :param pulumi.Input[str] comment: View comment, it will be codified in a json along with come metadata information (like cluster name in case of
                clustering)
-        :param pulumi.Input[bool] materialized: Is materialized view
         :param pulumi.Input[str] name: View Name
         :param pulumi.Input[str] to_table: For materialized view - destination table
         """
         pulumi.set(__self__, "database", database)
+        pulumi.set(__self__, "materialized", materialized)
         pulumi.set(__self__, "query", query)
         if cluster is not None:
             pulumi.set(__self__, "cluster", cluster)
         if comment is not None:
             pulumi.set(__self__, "comment", comment)
-        if materialized is not None:
-            pulumi.set(__self__, "materialized", materialized)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if to_table is not None:
@@ -56,6 +55,18 @@ class ViewArgs:
     @database.setter
     def database(self, value: pulumi.Input[str]):
         pulumi.set(self, "database", value)
+
+    @property
+    @pulumi.getter
+    def materialized(self) -> pulumi.Input[bool]:
+        """
+        Is materialized view
+        """
+        return pulumi.get(self, "materialized")
+
+    @materialized.setter
+    def materialized(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "materialized", value)
 
     @property
     @pulumi.getter
@@ -93,18 +104,6 @@ class ViewArgs:
     @comment.setter
     def comment(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "comment", value)
-
-    @property
-    @pulumi.getter
-    def materialized(self) -> Optional[pulumi.Input[bool]]:
-        """
-        Is materialized view
-        """
-        return pulumi.get(self, "materialized")
-
-    @materialized.setter
-    def materialized(self, value: Optional[pulumi.Input[bool]]):
-        pulumi.set(self, "materialized", value)
 
     @property
     @pulumi.getter
@@ -323,6 +322,8 @@ class View(pulumi.CustomResource):
             if database is None and not opts.urn:
                 raise TypeError("Missing required property 'database'")
             __props__.__dict__["database"] = database
+            if materialized is None and not opts.urn:
+                raise TypeError("Missing required property 'materialized'")
             __props__.__dict__["materialized"] = materialized
             __props__.__dict__["name"] = name
             if query is None and not opts.urn:
@@ -377,7 +378,7 @@ class View(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def cluster(self) -> pulumi.Output[Optional[str]]:
+    def cluster(self) -> pulumi.Output[str]:
         """
         Cluster Name
         """
@@ -402,7 +403,7 @@ class View(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def materialized(self) -> pulumi.Output[Optional[bool]]:
+    def materialized(self) -> pulumi.Output[bool]:
         """
         Is materialized view
         """
@@ -426,7 +427,7 @@ class View(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="toTable")
-    def to_table(self) -> pulumi.Output[Optional[str]]:
+    def to_table(self) -> pulumi.Output[str]:
         """
         For materialized view - destination table
         """

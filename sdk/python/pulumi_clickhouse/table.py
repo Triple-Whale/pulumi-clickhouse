@@ -18,10 +18,10 @@ class TableArgs:
     def __init__(__self__, *,
                  database: pulumi.Input[str],
                  engine: pulumi.Input[str],
-                 engine_params: pulumi.Input[Sequence[pulumi.Input[str]]],
                  cluster: Optional[pulumi.Input[str]] = None,
                  columns: Optional[pulumi.Input[Sequence[pulumi.Input['TableColumnArgs']]]] = None,
                  comment: Optional[pulumi.Input[str]] = None,
+                 engine_params: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  indices: Optional[pulumi.Input[Sequence[pulumi.Input['TableIndexArgs']]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  order_bies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -31,10 +31,10 @@ class TableArgs:
         The set of arguments for constructing a Table resource.
         :param pulumi.Input[str] database: DB Name where the table will bellow
         :param pulumi.Input[str] engine: Table engine type (Supported types so far: Distributed, ReplicatedReplacingMergeTree, ReplacingMergeTree)
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] engine_params: Engine params in case the engine type requires them
         :param pulumi.Input[str] cluster: Cluster Name, it is required for Replicated or Distributed tables and forbidden in other case
         :param pulumi.Input[Sequence[pulumi.Input['TableColumnArgs']]] columns: Column
         :param pulumi.Input[str] comment: Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] engine_params: Engine params in case the engine type requires them
         :param pulumi.Input[Sequence[pulumi.Input['TableIndexArgs']]] indices: Index
         :param pulumi.Input[str] name: Column Name
         :param pulumi.Input[Sequence[pulumi.Input[str]]] order_bies: Order by columns to use as sorting key
@@ -43,13 +43,14 @@ class TableArgs:
         """
         pulumi.set(__self__, "database", database)
         pulumi.set(__self__, "engine", engine)
-        pulumi.set(__self__, "engine_params", engine_params)
         if cluster is not None:
             pulumi.set(__self__, "cluster", cluster)
         if columns is not None:
             pulumi.set(__self__, "columns", columns)
         if comment is not None:
             pulumi.set(__self__, "comment", comment)
+        if engine_params is not None:
+            pulumi.set(__self__, "engine_params", engine_params)
         if indices is not None:
             pulumi.set(__self__, "indices", indices)
         if name is not None:
@@ -86,18 +87,6 @@ class TableArgs:
         pulumi.set(self, "engine", value)
 
     @property
-    @pulumi.getter(name="engineParams")
-    def engine_params(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
-        """
-        Engine params in case the engine type requires them
-        """
-        return pulumi.get(self, "engine_params")
-
-    @engine_params.setter
-    def engine_params(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
-        pulumi.set(self, "engine_params", value)
-
-    @property
     @pulumi.getter
     def cluster(self) -> Optional[pulumi.Input[str]]:
         """
@@ -132,6 +121,18 @@ class TableArgs:
     @comment.setter
     def comment(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "comment", value)
+
+    @property
+    @pulumi.getter(name="engineParams")
+    def engine_params(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Engine params in case the engine type requires them
+        """
+        return pulumi.get(self, "engine_params")
+
+    @engine_params.setter
+    def engine_params(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "engine_params", value)
 
     @property
     @pulumi.getter
@@ -465,8 +466,6 @@ class Table(pulumi.CustomResource):
             if engine is None and not opts.urn:
                 raise TypeError("Missing required property 'engine'")
             __props__.__dict__["engine"] = engine
-            if engine_params is None and not opts.urn:
-                raise TypeError("Missing required property 'engine_params'")
             __props__.__dict__["engine_params"] = engine_params
             __props__.__dict__["indices"] = indices
             __props__.__dict__["name"] = name
@@ -572,7 +571,7 @@ class Table(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="engineParams")
-    def engine_params(self) -> pulumi.Output[Sequence[str]]:
+    def engine_params(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
         Engine params in case the engine type requires them
         """

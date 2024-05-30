@@ -164,7 +164,7 @@ namespace Pulumi.Clickhouse
         [Input("engine", required: true)]
         public Input<string> Engine { get; set; } = null!;
 
-        [Input("engineParams", required: true)]
+        [Input("engineParams")]
         private InputList<string>? _engineParams;
 
         /// <summary>

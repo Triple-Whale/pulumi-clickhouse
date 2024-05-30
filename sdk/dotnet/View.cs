@@ -16,7 +16,7 @@ namespace Pulumi.Clickhouse
         /// Cluster Name
         /// </summary>
         [Output("cluster")]
-        public Output<string?> Cluster { get; private set; } = null!;
+        public Output<string> Cluster { get; private set; } = null!;
 
         /// <summary>
         /// View comment, it will be codified in a json along with come metadata information (like cluster name in case of
@@ -35,7 +35,7 @@ namespace Pulumi.Clickhouse
         /// Is materialized view
         /// </summary>
         [Output("materialized")]
-        public Output<bool?> Materialized { get; private set; } = null!;
+        public Output<bool> Materialized { get; private set; } = null!;
 
         /// <summary>
         /// View Name
@@ -53,7 +53,7 @@ namespace Pulumi.Clickhouse
         /// For materialized view - destination table
         /// </summary>
         [Output("toTable")]
-        public Output<string?> ToTable { get; private set; } = null!;
+        public Output<string> ToTable { get; private set; } = null!;
 
 
         /// <summary>
@@ -124,8 +124,8 @@ namespace Pulumi.Clickhouse
         /// <summary>
         /// Is materialized view
         /// </summary>
-        [Input("materialized")]
-        public Input<bool>? Materialized { get; set; }
+        [Input("materialized", required: true)]
+        public Input<bool> Materialized { get; set; } = null!;
 
         /// <summary>
         /// View Name

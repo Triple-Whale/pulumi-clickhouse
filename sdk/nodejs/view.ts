@@ -35,7 +35,7 @@ export class View extends pulumi.CustomResource {
     /**
      * Cluster Name
      */
-    public readonly cluster!: pulumi.Output<string | undefined>;
+    public readonly cluster!: pulumi.Output<string>;
     /**
      * View comment, it will be codified in a json along with come metadata information (like cluster name in case of
      * clustering)
@@ -48,7 +48,7 @@ export class View extends pulumi.CustomResource {
     /**
      * Is materialized view
      */
-    public readonly materialized!: pulumi.Output<boolean | undefined>;
+    public readonly materialized!: pulumi.Output<boolean>;
     /**
      * View Name
      */
@@ -60,7 +60,7 @@ export class View extends pulumi.CustomResource {
     /**
      * For materialized view - destination table
      */
-    public readonly toTable!: pulumi.Output<string | undefined>;
+    public readonly toTable!: pulumi.Output<string>;
 
     /**
      * Create a View resource with the given unique name, arguments, and options.
@@ -86,6 +86,9 @@ export class View extends pulumi.CustomResource {
             const args = argsOrState as ViewArgs | undefined;
             if ((!args || args.database === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'database'");
+            }
+            if ((!args || args.materialized === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'materialized'");
             }
             if ((!args || args.query === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'query'");
@@ -158,7 +161,7 @@ export interface ViewArgs {
     /**
      * Is materialized view
      */
-    materialized?: pulumi.Input<boolean>;
+    materialized: pulumi.Input<boolean>;
     /**
      * View Name
      */

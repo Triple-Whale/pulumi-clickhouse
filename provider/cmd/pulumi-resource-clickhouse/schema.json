@@ -109,7 +109,18 @@
             "required": [
                 "name",
                 "type"
-            ]
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "comment",
+                        "defaultExpression",
+                        "defaultKind",
+                        "name",
+                        "type"
+                    ]
+                }
+            }
         },
         "clickhouse:index/TableIndex:TableIndex": {
             "properties": {
@@ -494,7 +505,6 @@
             "required": [
                 "database",
                 "engine",
-                "engineParams",
                 "name"
             ],
             "inputProperties": {
@@ -572,8 +582,7 @@
             },
             "requiredInputs": [
                 "database",
-                "engine",
-                "engineParams"
+                "engine"
             ],
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering Table resources.\n",
@@ -750,9 +759,12 @@
                 }
             },
             "required": [
+                "cluster",
                 "database",
+                "materialized",
                 "name",
-                "query"
+                "query",
+                "toTable"
             ],
             "inputProperties": {
                 "cluster": {
@@ -793,6 +805,7 @@
             },
             "requiredInputs": [
                 "database",
+                "materialized",
                 "query"
             ],
             "stateInputs": {
