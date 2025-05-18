@@ -109,18 +109,7 @@
             "required": [
                 "name",
                 "type"
-            ],
-            "language": {
-                "nodejs": {
-                    "requiredOutputs": [
-                        "comment",
-                        "defaultExpression",
-                        "defaultKind",
-                        "name",
-                        "type"
-                    ]
-                }
-            }
+            ]
         },
         "clickhouse:index/TableIndex:TableIndex": {
             "properties": {
