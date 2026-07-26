@@ -87,8 +87,7 @@
         "clickhouse:index/TableColumn:TableColumn": {
             "properties": {
                 "comment": {
-                    "type": "string",
-                    "description": "Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)\n"
+                    "type": "string"
                 },
                 "defaultExpression": {
                     "type": "string"
@@ -97,12 +96,10 @@
                     "type": "string"
                 },
                 "name": {
-                    "type": "string",
-                    "description": "Column Name\n"
+                    "type": "string"
                 },
                 "type": {
-                    "type": "string",
-                    "description": "Column Type\n"
+                    "type": "string"
                 }
             },
             "type": "object",
@@ -123,12 +120,10 @@
                 },
                 "name": {
                     "type": "string",
-                    "description": "Column Name\n",
                     "willReplaceOnChanges": true
                 },
                 "type": {
                     "type": "string",
-                    "description": "Column Type\n",
                     "willReplaceOnChanges": true
                 }
             },
@@ -143,7 +138,6 @@
             "properties": {
                 "by": {
                     "type": "string",
-                    "description": "Column to use as part of the partition key\n",
                     "willReplaceOnChanges": true
                 },
                 "mod": {
@@ -152,13 +146,36 @@
                 },
                 "partitionFunction": {
                     "type": "string",
-                    "description": "Partition function, could be empty or one of following: toYYYYMM, toYYYYMMDD or toYYYYMMDDhhmmss\n",
                     "willReplaceOnChanges": true
                 }
             },
             "type": "object",
             "required": [
                 "by"
+            ]
+        },
+        "clickhouse:index/ViewColumn:ViewColumn": {
+            "properties": {
+                "comment": {
+                    "type": "string"
+                },
+                "defaultExpression": {
+                    "type": "string"
+                },
+                "defaultKind": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name",
+                "type"
             ]
         },
         "clickhouse:index/getDbsDb:getDbsDb": {
@@ -267,7 +284,6 @@
     },
     "resources": {
         "clickhouse:index/db:Db": {
-            "description": "Resource to handle clickhouse databases.\n",
             "properties": {
                 "cluster": {
                     "type": "string",
@@ -361,7 +377,6 @@
             }
         },
         "clickhouse:index/role:Role": {
-            "description": "Resource to manage Clickhouse roles\n",
             "properties": {
                 "database": {
                     "type": "string",
@@ -426,7 +441,6 @@
             }
         },
         "clickhouse:index/table:Table": {
-            "description": "Resource to manage tables\n",
             "properties": {
                 "cluster": {
                     "type": "string",
@@ -441,7 +455,7 @@
                 },
                 "comment": {
                     "type": "string",
-                    "description": "Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)\n"
+                    "description": "Database comment, it will be codified in a json along with come metadata information (like cluster name in case of\nclustering)\n"
                 },
                 "database": {
                     "type": "string",
@@ -467,7 +481,7 @@
                 },
                 "name": {
                     "type": "string",
-                    "description": "Column Name\n"
+                    "description": "Table Name\n"
                 },
                 "orderBies": {
                     "type": "array",
@@ -511,7 +525,7 @@
                 },
                 "comment": {
                     "type": "string",
-                    "description": "Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)\n"
+                    "description": "Database comment, it will be codified in a json along with come metadata information (like cluster name in case of\nclustering)\n"
                 },
                 "database": {
                     "type": "string",
@@ -541,7 +555,7 @@
                 },
                 "name": {
                     "type": "string",
-                    "description": "Column Name\n",
+                    "description": "Table Name\n",
                     "willReplaceOnChanges": true
                 },
                 "orderBies": {
@@ -590,7 +604,7 @@
                     },
                     "comment": {
                         "type": "string",
-                        "description": "Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)\n"
+                        "description": "Database comment, it will be codified in a json along with come metadata information (like cluster name in case of\nclustering)\n"
                     },
                     "database": {
                         "type": "string",
@@ -620,7 +634,7 @@
                     },
                     "name": {
                         "type": "string",
-                        "description": "Column Name\n",
+                        "description": "Table Name\n",
                         "willReplaceOnChanges": true
                     },
                     "orderBies": {
@@ -652,7 +666,6 @@
             }
         },
         "clickhouse:index/user:User": {
-            "description": "Resource to manage Clickhouse users\n",
             "properties": {
                 "name": {
                     "type": "string",
@@ -722,6 +735,13 @@
                     "type": "string",
                     "description": "Cluster Name\n"
                 },
+                "columns": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/clickhouse:index/ViewColumn:ViewColumn"
+                    },
+                    "description": "Column definitions for inline engine\n"
+                },
                 "comment": {
                     "type": "string",
                     "description": "View comment, it will be codified in a json along with come metadata information (like cluster name in case of\nclustering)\n"
@@ -729,6 +749,10 @@
                 "database": {
                     "type": "string",
                     "description": "DB Name where the view will bellow\n"
+                },
+                "engine": {
+                    "type": "string",
+                    "description": "Inline engine for self-contained REFRESH MV (e.g. 'MergeTree')\n"
                 },
                 "materialized": {
                     "type": "boolean",
@@ -738,9 +762,20 @@
                     "type": "string",
                     "description": "View Name\n"
                 },
+                "orderBies": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Order by columns for inline engine\n"
+                },
                 "query": {
                     "type": "string",
                     "description": "View query\n"
+                },
+                "refresh": {
+                    "type": "string",
+                    "description": "REFRESH clause for materialized view (e.g. 'EVERY 1 HOUR')\n"
                 },
                 "toTable": {
                     "type": "string",
@@ -761,6 +796,14 @@
                     "description": "Cluster Name\n",
                     "willReplaceOnChanges": true
                 },
+                "columns": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/clickhouse:index/ViewColumn:ViewColumn"
+                    },
+                    "description": "Column definitions for inline engine\n",
+                    "willReplaceOnChanges": true
+                },
                 "comment": {
                     "type": "string",
                     "description": "View comment, it will be codified in a json along with come metadata information (like cluster name in case of\nclustering)\n",
@@ -769,6 +812,11 @@
                 "database": {
                     "type": "string",
                     "description": "DB Name where the view will bellow\n",
+                    "willReplaceOnChanges": true
+                },
+                "engine": {
+                    "type": "string",
+                    "description": "Inline engine for self-contained REFRESH MV (e.g. 'MergeTree')\n",
                     "willReplaceOnChanges": true
                 },
                 "materialized": {
@@ -781,9 +829,22 @@
                     "description": "View Name\n",
                     "willReplaceOnChanges": true
                 },
+                "orderBies": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Order by columns for inline engine\n",
+                    "willReplaceOnChanges": true
+                },
                 "query": {
                     "type": "string",
                     "description": "View query\n",
+                    "willReplaceOnChanges": true
+                },
+                "refresh": {
+                    "type": "string",
+                    "description": "REFRESH clause for materialized view (e.g. 'EVERY 1 HOUR')\n",
                     "willReplaceOnChanges": true
                 },
                 "toTable": {
@@ -805,6 +866,14 @@
                         "description": "Cluster Name\n",
                         "willReplaceOnChanges": true
                     },
+                    "columns": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/clickhouse:index/ViewColumn:ViewColumn"
+                        },
+                        "description": "Column definitions for inline engine\n",
+                        "willReplaceOnChanges": true
+                    },
                     "comment": {
                         "type": "string",
                         "description": "View comment, it will be codified in a json along with come metadata information (like cluster name in case of\nclustering)\n",
@@ -813,6 +882,11 @@
                     "database": {
                         "type": "string",
                         "description": "DB Name where the view will bellow\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "engine": {
+                        "type": "string",
+                        "description": "Inline engine for self-contained REFRESH MV (e.g. 'MergeTree')\n",
                         "willReplaceOnChanges": true
                     },
                     "materialized": {
@@ -825,9 +899,22 @@
                         "description": "View Name\n",
                         "willReplaceOnChanges": true
                     },
+                    "orderBies": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Order by columns for inline engine\n",
+                        "willReplaceOnChanges": true
+                    },
                     "query": {
                         "type": "string",
                         "description": "View query\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "refresh": {
+                        "type": "string",
+                        "description": "REFRESH clause for materialized view (e.g. 'EVERY 1 HOUR')\n",
                         "willReplaceOnChanges": true
                     },
                     "toTable": {
@@ -842,7 +929,6 @@
     },
     "functions": {
         "clickhouse:index/getDbs:getDbs": {
-            "description": "Datasource to retrieve all databases set in clickhouse instance\n",
             "outputs": {
                 "description": "A collection of values returned by getDbs.\n",
                 "properties": {

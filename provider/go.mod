@@ -4,6 +4,8 @@ go 1.21
 
 replace github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20230912190043-e6d96b3b8f7e
 
+replace github.com/Triple-Whale/terraform-provider-clickhouse => /Users/chanaadler/code/triplewhale/terraform-provider-clickhouse
+
 require (
 	github.com/Triple-Whale/terraform-provider-clickhouse v1.0.43
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.69.0

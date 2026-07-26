@@ -6,9 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Resource to manage tables
- */
 export class Table extends pulumi.CustomResource {
     /**
      * Get an existing Table resource's state with the given name, ID, and optional extra
@@ -46,7 +43,8 @@ export class Table extends pulumi.CustomResource {
      */
     public readonly columns!: pulumi.Output<outputs.TableColumn[] | undefined>;
     /**
-     * Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
+     * Database comment, it will be codified in a json along with come metadata information (like cluster name in case of
+     * clustering)
      */
     public readonly comment!: pulumi.Output<string | undefined>;
     /**
@@ -66,7 +64,7 @@ export class Table extends pulumi.CustomResource {
      */
     public readonly indices!: pulumi.Output<outputs.TableIndex[] | undefined>;
     /**
-     * Column Name
+     * Table Name
      */
     public readonly name!: pulumi.Output<string>;
     /**
@@ -144,7 +142,8 @@ export interface TableState {
      */
     columns?: pulumi.Input<pulumi.Input<inputs.TableColumn>[]>;
     /**
-     * Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
+     * Database comment, it will be codified in a json along with come metadata information (like cluster name in case of
+     * clustering)
      */
     comment?: pulumi.Input<string>;
     /**
@@ -164,7 +163,7 @@ export interface TableState {
      */
     indices?: pulumi.Input<pulumi.Input<inputs.TableIndex>[]>;
     /**
-     * Column Name
+     * Table Name
      */
     name?: pulumi.Input<string>;
     /**
@@ -194,7 +193,8 @@ export interface TableArgs {
      */
     columns?: pulumi.Input<pulumi.Input<inputs.TableColumn>[]>;
     /**
-     * Database comment, it will be codified in a json along with come metadata information (like cluster name in case of clustering)
+     * Database comment, it will be codified in a json along with come metadata information (like cluster name in case of
+     * clustering)
      */
     comment?: pulumi.Input<string>;
     /**
@@ -214,7 +214,7 @@ export interface TableArgs {
      */
     indices?: pulumi.Input<pulumi.Input<inputs.TableIndex>[]>;
     /**
-     * Column Name
+     * Table Name
      */
     name?: pulumi.Input<string>;
     /**

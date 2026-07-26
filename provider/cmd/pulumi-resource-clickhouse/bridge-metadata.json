@@ -41,7 +41,15 @@
                 }
             },
             "clickhouse_view": {
-                "current": "clickhouse:index/view:View"
+                "current": "clickhouse:index/view:View",
+                "fields": {
+                    "column": {
+                        "maxItemsOne": false
+                    },
+                    "order_by": {
+                        "maxItemsOne": false
+                    }
+                }
             }
         },
         "datasources": {
@@ -75,6 +83,10 @@
             "clickhouse:index/TablePartitionBy:TablePartitionBy": {
                 "partitionFunction": "partition_function"
             },
+            "clickhouse:index/ViewColumn:ViewColumn": {
+                "defaultExpression": "default_expression",
+                "defaultKind": "default_kind"
+            },
             "clickhouse:index/db:Db": {
                 "dataPath": "data_path",
                 "metadataPath": "metadata_path"
@@ -91,6 +103,8 @@
                 "partitionBies": "partition_by"
             },
             "clickhouse:index/view:View": {
+                "columns": "column",
+                "orderBies": "order_by",
                 "toTable": "to_table"
             },
             "clickhouse:index:Provider": {

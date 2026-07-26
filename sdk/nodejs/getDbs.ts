@@ -6,9 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Datasource to retrieve all databases set in clickhouse instance
- */
 export function getDbs(opts?: pulumi.InvokeOptions): Promise<GetDbsResult> {
 
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -26,9 +23,6 @@ export interface GetDbsResult {
      */
     readonly id: string;
 }
-/**
- * Datasource to retrieve all databases set in clickhouse instance
- */
 export function getDbsOutput(opts?: pulumi.InvokeOptions): pulumi.Output<GetDbsResult> {
     return pulumi.output(getDbs(opts))
 }

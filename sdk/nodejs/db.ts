@@ -4,9 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-/**
- * Resource to handle clickhouse databases.
- */
 export class Db extends pulumi.CustomResource {
     /**
      * Get an existing Db resource's state with the given name, ID, and optional extra
