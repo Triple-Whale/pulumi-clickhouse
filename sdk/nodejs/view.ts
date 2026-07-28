@@ -2,6 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 export class View extends pulumi.CustomResource {
@@ -37,6 +39,10 @@ export class View extends pulumi.CustomResource {
      */
     public readonly cluster!: pulumi.Output<string>;
     /**
+     * Column definitions for inline engine
+     */
+    public readonly columns!: pulumi.Output<outputs.ViewColumn[] | undefined>;
+    /**
      * View comment, it will be codified in a json along with come metadata information (like cluster name in case of
      * clustering)
      */
@@ -46,6 +52,10 @@ export class View extends pulumi.CustomResource {
      */
     public readonly database!: pulumi.Output<string>;
     /**
+     * Inline engine for self-contained REFRESH MV (e.g. 'MergeTree')
+     */
+    public readonly engine!: pulumi.Output<string | undefined>;
+    /**
      * Is materialized view
      */
     public readonly materialized!: pulumi.Output<boolean>;
@@ -54,9 +64,17 @@ export class View extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
+     * Order by columns for inline engine
+     */
+    public readonly orderBies!: pulumi.Output<string[] | undefined>;
+    /**
      * View query
      */
     public readonly query!: pulumi.Output<string>;
+    /**
+     * REFRESH clause for materialized view (e.g. 'EVERY 1 HOUR')
+     */
+    public readonly refresh!: pulumi.Output<string | undefined>;
     /**
      * For materialized view - destination table
      */
@@ -76,11 +94,15 @@ export class View extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as ViewState | undefined;
             resourceInputs["cluster"] = state ? state.cluster : undefined;
+            resourceInputs["columns"] = state ? state.columns : undefined;
             resourceInputs["comment"] = state ? state.comment : undefined;
             resourceInputs["database"] = state ? state.database : undefined;
+            resourceInputs["engine"] = state ? state.engine : undefined;
             resourceInputs["materialized"] = state ? state.materialized : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["orderBies"] = state ? state.orderBies : undefined;
             resourceInputs["query"] = state ? state.query : undefined;
+            resourceInputs["refresh"] = state ? state.refresh : undefined;
             resourceInputs["toTable"] = state ? state.toTable : undefined;
         } else {
             const args = argsOrState as ViewArgs | undefined;
@@ -94,11 +116,15 @@ export class View extends pulumi.CustomResource {
                 throw new Error("Missing required property 'query'");
             }
             resourceInputs["cluster"] = args ? args.cluster : undefined;
+            resourceInputs["columns"] = args ? args.columns : undefined;
             resourceInputs["comment"] = args ? args.comment : undefined;
             resourceInputs["database"] = args ? args.database : undefined;
+            resourceInputs["engine"] = args ? args.engine : undefined;
             resourceInputs["materialized"] = args ? args.materialized : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["orderBies"] = args ? args.orderBies : undefined;
             resourceInputs["query"] = args ? args.query : undefined;
+            resourceInputs["refresh"] = args ? args.refresh : undefined;
             resourceInputs["toTable"] = args ? args.toTable : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -115,6 +141,10 @@ export interface ViewState {
      */
     cluster?: pulumi.Input<string>;
     /**
+     * Column definitions for inline engine
+     */
+    columns?: pulumi.Input<pulumi.Input<inputs.ViewColumn>[]>;
+    /**
      * View comment, it will be codified in a json along with come metadata information (like cluster name in case of
      * clustering)
      */
@@ -124,6 +154,10 @@ export interface ViewState {
      */
     database?: pulumi.Input<string>;
     /**
+     * Inline engine for self-contained REFRESH MV (e.g. 'MergeTree')
+     */
+    engine?: pulumi.Input<string>;
+    /**
      * Is materialized view
      */
     materialized?: pulumi.Input<boolean>;
@@ -132,9 +166,17 @@ export interface ViewState {
      */
     name?: pulumi.Input<string>;
     /**
+     * Order by columns for inline engine
+     */
+    orderBies?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
      * View query
      */
     query?: pulumi.Input<string>;
+    /**
+     * REFRESH clause for materialized view (e.g. 'EVERY 1 HOUR')
+     */
+    refresh?: pulumi.Input<string>;
     /**
      * For materialized view - destination table
      */
@@ -150,6 +192,10 @@ export interface ViewArgs {
      */
     cluster?: pulumi.Input<string>;
     /**
+     * Column definitions for inline engine
+     */
+    columns?: pulumi.Input<pulumi.Input<inputs.ViewColumn>[]>;
+    /**
      * View comment, it will be codified in a json along with come metadata information (like cluster name in case of
      * clustering)
      */
@@ -159,6 +205,10 @@ export interface ViewArgs {
      */
     database: pulumi.Input<string>;
     /**
+     * Inline engine for self-contained REFRESH MV (e.g. 'MergeTree')
+     */
+    engine?: pulumi.Input<string>;
+    /**
      * Is materialized view
      */
     materialized: pulumi.Input<boolean>;
@@ -167,9 +217,17 @@ export interface ViewArgs {
      */
     name?: pulumi.Input<string>;
     /**
+     * Order by columns for inline engine
+     */
+    orderBies?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
      * View query
      */
     query: pulumi.Input<string>;
+    /**
+     * REFRESH clause for materialized view (e.g. 'EVERY 1 HOUR')
+     */
+    refresh?: pulumi.Input<string>;
     /**
      * For materialized view - destination table
      */
