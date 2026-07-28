@@ -161,6 +161,30 @@
                 "by"
             ]
         },
+        "clickhouse:index/ViewColumn:ViewColumn": {
+            "properties": {
+                "comment": {
+                    "type": "string"
+                },
+                "defaultExpression": {
+                    "type": "string"
+                },
+                "defaultKind": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name",
+                "type"
+            ]
+        },
         "clickhouse:index/getDbsDb:getDbsDb": {
             "properties": {
                 "comment": {
@@ -722,6 +746,13 @@
                     "type": "string",
                     "description": "Cluster Name\n"
                 },
+                "columns": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/clickhouse:index/ViewColumn:ViewColumn"
+                    },
+                    "description": "Column definitions for inline engine\n"
+                },
                 "comment": {
                     "type": "string",
                     "description": "View comment, it will be codified in a json along with come metadata information (like cluster name in case of\nclustering)\n"
@@ -729,6 +760,10 @@
                 "database": {
                     "type": "string",
                     "description": "DB Name where the view will bellow\n"
+                },
+                "engine": {
+                    "type": "string",
+                    "description": "Inline engine for self-contained REFRESH MV (e.g. 'MergeTree')\n"
                 },
                 "materialized": {
                     "type": "boolean",
@@ -738,9 +773,20 @@
                     "type": "string",
                     "description": "View Name\n"
                 },
+                "orderBies": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Order by columns for inline engine\n"
+                },
                 "query": {
                     "type": "string",
                     "description": "View query\n"
+                },
+                "refresh": {
+                    "type": "string",
+                    "description": "REFRESH clause for materialized view (e.g. 'EVERY 1 HOUR')\n"
                 },
                 "toTable": {
                     "type": "string",
@@ -761,6 +807,14 @@
                     "description": "Cluster Name\n",
                     "willReplaceOnChanges": true
                 },
+                "columns": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/clickhouse:index/ViewColumn:ViewColumn"
+                    },
+                    "description": "Column definitions for inline engine\n",
+                    "willReplaceOnChanges": true
+                },
                 "comment": {
                     "type": "string",
                     "description": "View comment, it will be codified in a json along with come metadata information (like cluster name in case of\nclustering)\n",
@@ -769,6 +823,11 @@
                 "database": {
                     "type": "string",
                     "description": "DB Name where the view will bellow\n",
+                    "willReplaceOnChanges": true
+                },
+                "engine": {
+                    "type": "string",
+                    "description": "Inline engine for self-contained REFRESH MV (e.g. 'MergeTree')\n",
                     "willReplaceOnChanges": true
                 },
                 "materialized": {
@@ -781,9 +840,22 @@
                     "description": "View Name\n",
                     "willReplaceOnChanges": true
                 },
+                "orderBies": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Order by columns for inline engine\n",
+                    "willReplaceOnChanges": true
+                },
                 "query": {
                     "type": "string",
                     "description": "View query\n",
+                    "willReplaceOnChanges": true
+                },
+                "refresh": {
+                    "type": "string",
+                    "description": "REFRESH clause for materialized view (e.g. 'EVERY 1 HOUR')\n",
                     "willReplaceOnChanges": true
                 },
                 "toTable": {
@@ -805,6 +877,14 @@
                         "description": "Cluster Name\n",
                         "willReplaceOnChanges": true
                     },
+                    "columns": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/clickhouse:index/ViewColumn:ViewColumn"
+                        },
+                        "description": "Column definitions for inline engine\n",
+                        "willReplaceOnChanges": true
+                    },
                     "comment": {
                         "type": "string",
                         "description": "View comment, it will be codified in a json along with come metadata information (like cluster name in case of\nclustering)\n",
@@ -813,6 +893,11 @@
                     "database": {
                         "type": "string",
                         "description": "DB Name where the view will bellow\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "engine": {
+                        "type": "string",
+                        "description": "Inline engine for self-contained REFRESH MV (e.g. 'MergeTree')\n",
                         "willReplaceOnChanges": true
                     },
                     "materialized": {
@@ -825,9 +910,22 @@
                         "description": "View Name\n",
                         "willReplaceOnChanges": true
                     },
+                    "orderBies": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Order by columns for inline engine\n",
+                        "willReplaceOnChanges": true
+                    },
                     "query": {
                         "type": "string",
                         "description": "View query\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "refresh": {
+                        "type": "string",
+                        "description": "REFRESH clause for materialized view (e.g. 'EVERY 1 HOUR')\n",
                         "willReplaceOnChanges": true
                     },
                     "toTable": {

@@ -56,3 +56,11 @@ export interface TablePartitionBy {
     partitionFunction?: string;
 }
 
+export interface ViewColumn {
+    comment?: string;
+    defaultExpression?: string;
+    defaultKind?: string;
+    name: string;
+    type: string;
+}
+

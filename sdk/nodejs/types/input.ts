@@ -46,3 +46,11 @@ export interface TablePartitionBy {
      */
     partitionFunction?: pulumi.Input<string>;
 }
+
+export interface ViewColumn {
+    comment?: pulumi.Input<string>;
+    defaultExpression?: pulumi.Input<string>;
+    defaultKind?: pulumi.Input<string>;
+    name: pulumi.Input<string>;
+    type: pulumi.Input<string>;
+}
