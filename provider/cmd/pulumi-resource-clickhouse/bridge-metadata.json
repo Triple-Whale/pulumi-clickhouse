@@ -100,7 +100,8 @@
                 "engineParams": "engine_params",
                 "indices": "index",
                 "orderBies": "order_by",
-                "partitionBies": "partition_by"
+                "partitionBies": "partition_by",
+                "replicasInSync": "replicas_in_sync"
             },
             "clickhouse:index/view:View": {
                 "columns": "column",
@@ -108,11 +109,15 @@
                 "toTable": "to_table"
             },
             "clickhouse:index:Provider": {
-                "defaultCluster": "default_cluster"
+                "defaultCluster": "default_cluster",
+                "replicaHosts": "replica_hosts",
+                "verifyReplicas": "verify_replicas"
             }
         },
         "renamedConfigProperties": {
-            "defaultCluster": "default_cluster"
+            "defaultCluster": "default_cluster",
+            "replicaHosts": "replica_hosts",
+            "verifyReplicas": "verify_replicas"
         }
     }
 }

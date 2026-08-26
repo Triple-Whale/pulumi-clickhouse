@@ -78,6 +78,11 @@ export class Table extends pulumi.CustomResource {
      */
     public readonly partitionBies!: pulumi.Output<outputs.TablePartitionBy[] | undefined>;
     /**
+     * Desired: true. With the provider's verify_replicas flag, read compares every replica and sets false on divergence; the
+     * resulting diff triggers a converge update
+     */
+    public readonly replicasInSync!: pulumi.Output<boolean | undefined>;
+    /**
      * Table settings
      */
     public readonly settings!: pulumi.Output<{[key: string]: string} | undefined>;
@@ -105,6 +110,7 @@ export class Table extends pulumi.CustomResource {
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["orderBies"] = state ? state.orderBies : undefined;
             resourceInputs["partitionBies"] = state ? state.partitionBies : undefined;
+            resourceInputs["replicasInSync"] = state ? state.replicasInSync : undefined;
             resourceInputs["settings"] = state ? state.settings : undefined;
         } else {
             const args = argsOrState as TableArgs | undefined;
@@ -124,6 +130,7 @@ export class Table extends pulumi.CustomResource {
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["orderBies"] = args ? args.orderBies : undefined;
             resourceInputs["partitionBies"] = args ? args.partitionBies : undefined;
+            resourceInputs["replicasInSync"] = args ? args.replicasInSync : undefined;
             resourceInputs["settings"] = args ? args.settings : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -176,6 +183,11 @@ export interface TableState {
      */
     partitionBies?: pulumi.Input<pulumi.Input<inputs.TablePartitionBy>[]>;
     /**
+     * Desired: true. With the provider's verify_replicas flag, read compares every replica and sets false on divergence; the
+     * resulting diff triggers a converge update
+     */
+    replicasInSync?: pulumi.Input<boolean>;
+    /**
      * Table settings
      */
     settings?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
@@ -225,6 +237,11 @@ export interface TableArgs {
      * Partition Key to split data
      */
     partitionBies?: pulumi.Input<pulumi.Input<inputs.TablePartitionBy>[]>;
+    /**
+     * Desired: true. With the provider's verify_replicas flag, read compares every replica and sets false on divergence; the
+     * resulting diff triggers a converge update
+     */
+    replicasInSync?: pulumi.Input<boolean>;
     /**
      * Table settings
      */
