@@ -63,8 +63,10 @@ export class Provider extends pulumi.ProviderResource {
             resourceInputs["host"] = args?.host ? pulumi.secret(args.host) : undefined;
             resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["port"] = pulumi.output(args ? args.port : undefined).apply(JSON.stringify);
+            resourceInputs["replicaHosts"] = pulumi.output(args ? args.replicaHosts : undefined).apply(JSON.stringify);
             resourceInputs["secure"] = pulumi.output(args ? args.secure : undefined).apply(JSON.stringify);
             resourceInputs["username"] = args ? args.username : undefined;
+            resourceInputs["verifyReplicas"] = pulumi.output(args ? args.verifyReplicas : undefined).apply(JSON.stringify);
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         const secretOpts = { additionalSecretOutputs: ["host", "password"] };
@@ -94,6 +96,10 @@ export interface ProviderArgs {
      */
     port: pulumi.Input<number>;
     /**
+     * All replica hosts of the cluster; used with verify_replicas to detect per-replica drift
+     */
+    replicaHosts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
      * Clickhouse secure connection
      */
     secure?: pulumi.Input<boolean>;
@@ -101,4 +107,8 @@ export interface ProviderArgs {
      * Clickhouse username with admin privileges
      */
     username?: pulumi.Input<string>;
+    /**
+     * Read every replica_hosts entry on refresh and flag tables whose replicas diverge
+     */
+    verifyReplicas?: pulumi.Input<boolean>;
 }

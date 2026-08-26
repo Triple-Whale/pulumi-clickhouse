@@ -52,6 +52,17 @@ Object.defineProperty(exports, "port", {
 });
 
 /**
+ * All replica hosts of the cluster; used with verify_replicas to detect per-replica drift
+ */
+export declare const replicaHosts: string[] | undefined;
+Object.defineProperty(exports, "replicaHosts", {
+    get() {
+        return __config.getObject<string[]>("replicaHosts");
+    },
+    enumerable: true,
+});
+
+/**
  * Clickhouse secure connection
  */
 export declare const secure: boolean | undefined;
@@ -69,6 +80,17 @@ export declare const username: string | undefined;
 Object.defineProperty(exports, "username", {
     get() {
         return __config.get("username");
+    },
+    enumerable: true,
+});
+
+/**
+ * Read every replica_hosts entry on refresh and flag tables whose replicas diverge
+ */
+export declare const verifyReplicas: boolean | undefined;
+Object.defineProperty(exports, "verifyReplicas", {
+    get() {
+        return __config.getObject<boolean>("verifyReplicas");
     },
     enumerable: true,
 });

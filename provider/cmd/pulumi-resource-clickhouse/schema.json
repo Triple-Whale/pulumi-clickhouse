@@ -69,6 +69,13 @@
                 "type": "integer",
                 "description": "Clickhouse server native protocol port (TCP)\n"
             },
+            "replicaHosts": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                },
+                "description": "All replica hosts of the cluster; used with verify_replicas to detect per-replica drift\n"
+            },
             "secure": {
                 "type": "boolean",
                 "description": "Clickhouse secure connection\n"
@@ -76,6 +83,10 @@
             "username": {
                 "type": "string",
                 "description": "Clickhouse username with admin privileges\n"
+            },
+            "verifyReplicas": {
+                "type": "boolean",
+                "description": "Read every replica_hosts entry on refresh and flag tables whose replicas diverge\n"
             }
         },
         "defaults": [
@@ -243,6 +254,13 @@
                 "type": "integer",
                 "description": "Clickhouse server native protocol port (TCP)\n"
             },
+            "replicaHosts": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                },
+                "description": "All replica hosts of the cluster; used with verify_replicas to detect per-replica drift\n"
+            },
             "secure": {
                 "type": "boolean",
                 "description": "Clickhouse secure connection\n"
@@ -250,6 +268,10 @@
             "username": {
                 "type": "string",
                 "description": "Clickhouse username with admin privileges\n"
+            },
+            "verifyReplicas": {
+                "type": "boolean",
+                "description": "Read every replica_hosts entry on refresh and flag tables whose replicas diverge\n"
             }
         },
         "required": [
@@ -275,6 +297,13 @@
                 "type": "integer",
                 "description": "Clickhouse server native protocol port (TCP)\n"
             },
+            "replicaHosts": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                },
+                "description": "All replica hosts of the cluster; used with verify_replicas to detect per-replica drift\n"
+            },
             "secure": {
                 "type": "boolean",
                 "description": "Clickhouse secure connection\n"
@@ -282,6 +311,10 @@
             "username": {
                 "type": "string",
                 "description": "Clickhouse username with admin privileges\n"
+            },
+            "verifyReplicas": {
+                "type": "boolean",
+                "description": "Read every replica_hosts entry on refresh and flag tables whose replicas diverge\n"
             }
         },
         "requiredInputs": [
@@ -507,6 +540,10 @@
                     },
                     "description": "Partition Key to split data\n"
                 },
+                "replicasInSync": {
+                    "type": "boolean",
+                    "description": "Desired: true. With the provider's verify_replicas flag, read compares every replica and sets false on divergence; the\nresulting diff triggers a converge update\n"
+                },
                 "settings": {
                     "type": "object",
                     "additionalProperties": {
@@ -583,6 +620,10 @@
                     },
                     "description": "Partition Key to split data\n",
                     "willReplaceOnChanges": true
+                },
+                "replicasInSync": {
+                    "type": "boolean",
+                    "description": "Desired: true. With the provider's verify_replicas flag, read compares every replica and sets false on divergence; the\nresulting diff triggers a converge update\n"
                 },
                 "settings": {
                     "type": "object",
@@ -662,6 +703,10 @@
                         },
                         "description": "Partition Key to split data\n",
                         "willReplaceOnChanges": true
+                    },
+                    "replicasInSync": {
+                        "type": "boolean",
+                        "description": "Desired: true. With the provider's verify_replicas flag, read compares every replica and sets false on divergence; the\nresulting diff triggers a converge update\n"
                     },
                     "settings": {
                         "type": "object",
